@@ -1,6 +1,6 @@
-#Spencer Bateman Webdev
+# Spencer Bateman Webdev
 
-##About me
+## About me
 I am an undergraduate computer science and music composition student at Northeastern.
 I have previously worked at [Icon Interactive](http://www.iconinteractive.com/) as a web developer & and [Cyptozoic Entertainment](https://www.cryptozoic.com/) as a game designer.
 
