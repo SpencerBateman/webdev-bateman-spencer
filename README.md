@@ -6,4 +6,4 @@ I have previously worked at [Icon Interactive](http://www.iconinteractive.com/) 
 
 This repository if for cs5610, the graduate web development course at Northeastern.
 
-Checkout my inclass webdev project [here](https://webdev-bateman-spencer.herokuapp.com/)
+Checkout my in class webdev project [here](https://webdev-bateman-spencer.herokuapp.com/assets/index.html)
