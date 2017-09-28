@@ -11,3 +11,28 @@
   color: #377BB5;
 }
 
+.salb-bg-grey {
+  background: #F8F8F8;
+}
+
+.salb-widget {
+  display: block;
+  position: relative;
+}
+
+.salb-widget img {
+  width: 100%;
+}
+
+.salb-widget__box {
+  width: 30px;
+  background: white;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  position: absolute;
+}
+
+.salb-widget__box span {
+  font-size: 10px;
+}
