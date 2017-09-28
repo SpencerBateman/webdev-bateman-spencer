@@ -36,3 +36,11 @@
 .salb-widget__box span {
   font-size: 10px;
 }
+
+a span {
+  color: white;
+}
+
+.salb-dark {
+  color: #333333;
+}
