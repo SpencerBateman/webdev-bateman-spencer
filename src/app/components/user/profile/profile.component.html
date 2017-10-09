@@ -1,0 +1,29 @@
+<header class='bg-primary'>
+  <div class='container'>
+    <div class='row'>
+      <div class='col-xs-6'>
+        <h1>Profile</h1>
+      </div>
+      <div class='col-xs-6'>
+        <a [routerLink]="['/profile']"><span class='glyphicon glyphicon-ok pull-right salb-glyphicon'></span></a>
+      </div>
+    </div>
+  </div>
+</header>
+<div class='container'>
+  <h6>username</h6>
+  <input type='text' class='form-control' placeholder='username'>
+  <h6>email</h6>
+  <input type='email' class='form-control' placeholder='email'>
+  <h6>first name</h6>
+  <input type='text' class='form-control' placeholder='First Name'>
+  <h6>last name</h6>
+  <input type='text' class='form-control' placeholder='Last Name'>
+  <a [routerLink]="['/website-list']"><button type='button' class='btn btn-primary btn-block'>Websites</button></a>
+  <a [routerLink]="['/login']"><button type='button' class='btn btn-danger btn-block'>Logout</button></a>
+</div>
+<footer class='bg-primary navbar-fixed-bottom'>
+  <div class='container'>
+    <span class='glyphicon glyphicon-user pull-right salb-glyphicon'></span>
+  </div>
+</footer>
