@@ -19,21 +19,45 @@ export class PageService {
   //adds the page parameter instance to the local pages array.
   //The new page's websiteId is set to the websiteId parameter
   createPage(websiteId: string, page: any) {
+    page._id = Math.random();
+    page.websiteId = websiteId;
+    this.pages.push(page);
+    return page;
   }
 
   // retrieves the pages in local pages array whose websiteId matches the parameter websiteId
   findPageByWebsiteId(websiteId: string) {
+    for (let x = 0; x < this.pages.length; x ++) {
+      if (websiteId === this.pages[x].websiteId) {
+        return this.pages[x];
+      }
+    }
   }
 
   // retrieves the page in local pages array whose _id matches the pageId parameter
   findPageById(pageId: string) {
+    for (let x = 0; x < this.pages.length; x ++) {
+      if (this.pages[x]._id === pageId) {
+        return pages[x];
+      }
+    }
   }
 
   // updates the page in local pages array whose _id matches the pageId parameter
   updatePage(pageId: string, page: any) {
+    for (let x = 0; x < this.pages.length; x ++) {
+      if (this.pages[x]._id === pageId) {
+        this.pages[x] = page;
+      }
+    }
   }
 
   // removes the page from local pages array whose _id matches the pageId parameter
   deletePage(pageId: string) {
+    for (let x = 0; x < this.pages.length; x ++) {
+      if (pageId === this.pages.[x]._id) {
+        pages.splice(x, 1);
+      }
+    }
   }
 }

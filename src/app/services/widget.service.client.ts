@@ -26,22 +26,47 @@ export class WidgetService {
   // adds the widget parameter instance to the local widgets array.
   // The new widget's pageId is set to the pageId parameter
   createWidget(pageId: string, widget: any) {
+    widget._id = Math.random();
+    widget.pageId = pageId;
+    this.widgets.push(widget);
+    return widget;
   }
 
   // retrieves the widgets in local widgets array whose pageId matches the parameter pageId
   findWidgetsByPageId(pageId: string) {
+    for (let i = 0; i < this.widgets.length; i++ ) {
+      if (this.widgets[i].pageId === pageId) {
+        return this.widgets[i];
+      }
+    }
   }
 
   // retrieves the widget in local widgets array whose _id matches the widgetId parameter
   findWidgetById(widgetId: string) {
+    for (let i = 0; i < this.widgets.length; i++ ) {
+      if (this.widgets[i]._id === widgetId) {
+        return this.widgets[i];
+      }
+    }
   }
 
   // updates the widget in local widgets array whose _id matches the widgetId parameter
   updateWidget(widgetId: string, widget: any) {
+    for (let i = 0; i < this.widgets.length; i++ ) {
+      if (this.widgets[i]._id === widgetId) {
+        this.widgets[i] = widget;
+      }
+    }
+
   }
 
   // removes the widget from local widgets array whose _id matches the widgetId parameter
   deleteWidget(widgetId: string) {
+    for (let i = 0; i < this.widgets.length; i++ ) {
+      if (this.widgets[i]._id === widgetId) {
+        this.widgets.splice(i, 1);
+      }
+    }
   }
 
 }

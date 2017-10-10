@@ -62,7 +62,7 @@ export class UserService {
   updateUser(userId: string, user: any) {
     for (let x = 0; x < this.users.length; x ++) {
       if (userId === this.users[x]._id) {
-        users[x] = user;
+        this.users[x] = user;
       }
     }
   }
@@ -71,7 +71,7 @@ export class UserService {
   deleteUser(userId: string) {
     for (let x = 0; x < this.users.length; x ++) {
       if (userId === this.users[x]._id) {
-        users.splice(x, 1);
+        this.users.splice(x, 1);
       }
     }
   }

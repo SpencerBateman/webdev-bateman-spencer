@@ -23,26 +23,47 @@ export class WebsiteService {
   // adds the website parameter instance to the local websites array.
   // The new website's developerId is set to the userId parameter
   createWebsite(userId: string, website: any) {
-
+    website._id = Math.random();
+    website.developerId = userId;
+    this.websites.push(website);
+    return website;
   }
 
   // retrieves the websites in local websites array whose developerId matches the parameter userId
   findWebsiteByUser(userId: string) {
-
+    for (let i = 0; i < this.websites.length; i++ ) {
+      if (this.website[i].developerId === userId) {
+        return this.website[i];
+      }
+    }
   }
 
   // retrieves the website in local websites array whose _id matches the websiteId parameter
   findWebsiteById(websiteId: string) {
+    for (let i = 0; i < this.websites.length; i++ ) {
+      if (this.website[i]._id === websiteId) {
+        return this.website[i];
+      }
+    }
 
   }
 
   // updates the website in local websites array whose _id matches the websiteId parameter
   updateWebsite(websiteId: string, website: any) {
-
+    for (let i = 0; i < this.websites.length; i++ ) {
+      if (this.website[i]._id === websiteId) {
+        this.website[i] = website;
+      }
+    }
   }
 
   // removes the website from local websites array whose _id matches the websiteId parameter
   deleteWebsite(websiteId: string) {
+    for (let i = 0; i < this.websites.length; i++ ) {
+      if (this.websites[i]._id === websiteId) {
+        this.websites.splice(i, 1);
+      }
+    }
 
   }
 }
