@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Response} from '@angular/http';
 import 'rxjs/Rx';
-import { enviornment } from '../../enviornments/enviornment';
+import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 
 // injecting the service into module

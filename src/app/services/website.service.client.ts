@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Response} from '@angular/http';
 import 'rxjs/Rx';
-import { enviornment } from '../../enviornments/enviornment';
+import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 
 // injecting the service into module
@@ -32,8 +32,8 @@ export class WebsiteService {
   // retrieves the websites in local websites array whose developerId matches the parameter userId
   findWebsiteByUser(userId: string) {
     for (let i = 0; i < this.websites.length; i++ ) {
-      if (this.website[i].developerId === userId) {
-        return this.website[i];
+      if (this.websites[i].developerId === userId) {
+        return this.websites[i];
       }
     }
   }
@@ -41,8 +41,8 @@ export class WebsiteService {
   // retrieves the website in local websites array whose _id matches the websiteId parameter
   findWebsiteById(websiteId: string) {
     for (let i = 0; i < this.websites.length; i++ ) {
-      if (this.website[i]._id === websiteId) {
-        return this.website[i];
+      if (this.websites[i]._id === websiteId) {
+        return this.websites[i];
       }
     }
 
@@ -51,8 +51,8 @@ export class WebsiteService {
   // updates the website in local websites array whose _id matches the websiteId parameter
   updateWebsite(websiteId: string, website: any) {
     for (let i = 0; i < this.websites.length; i++ ) {
-      if (this.website[i]._id === websiteId) {
-        this.website[i] = website;
+      if (this.websites[i]._id === websiteId) {
+        this.websites[i] = website;
       }
     }
   }

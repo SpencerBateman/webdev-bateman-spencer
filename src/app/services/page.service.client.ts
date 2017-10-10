@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Response} from '@angular/http';
 import 'rxjs/Rx';
-import { enviornment } from '../../enviornments/enviornment';
+import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 
 // injecting the service into module
@@ -38,7 +38,7 @@ export class PageService {
   findPageById(pageId: string) {
     for (let x = 0; x < this.pages.length; x ++) {
       if (this.pages[x]._id === pageId) {
-        return pages[x];
+        return this.pages[x];
       }
     }
   }
@@ -55,8 +55,8 @@ export class PageService {
   // removes the page from local pages array whose _id matches the pageId parameter
   deletePage(pageId: string) {
     for (let x = 0; x < this.pages.length; x ++) {
-      if (pageId === this.pages.[x]._id) {
-        pages.splice(x, 1);
+      if (pageId === this.pages[x]._id) {
+        this.pages.splice(x, 1);
       }
     }
   }
