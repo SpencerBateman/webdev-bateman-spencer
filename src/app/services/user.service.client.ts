@@ -22,8 +22,6 @@ export class UserService {
     'findUserById': this.findUserById
   };
 
-  // Boy oh boy I wish I could write tests for this
-
   // adds the user parameter instance to the local users array
   createUser(user: any) {
     user._id = Math.random();

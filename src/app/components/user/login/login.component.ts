@@ -1,21 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserService } from '../../../services/user.service.client';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
-  title: string; //see usage as string interpolation
-  disabledFlag: boolean;
-  inputText: string;
+  @ViewChild('f') loginForm: NgForm;
 
-  constructor() { }
+  // properties
+  username: string;
+  password: string;
+  errorFlag: boolean;
+  errorMsg = 'Invalid username or password !';
+
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    this.title = 'This is the login page';
-    this.disabledFlag = true;
+  }
+
+  login(username: string, password: string): void {
+    const user = this.userService.findUserByUsername(username);
+    if (username === user.username && password === user.password) {
+      this.router.navigate(['user/' + user._id]);
+    }
   }
 
   // binding click event

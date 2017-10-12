@@ -1,9 +1,19 @@
 <div class="container">
-  <h1>{{title}}</h1>
-  <form>
-    <input type='text' class='form-control' placeholder='username'>
-    <input type='password' class='form-control' placeholder='password'>
-    <a [routerLink]="['/register']"><button type='button' class='btn btn-primary btn-block'>Login</button></a>
-    <a [routerLink]="['/register']"><button type='button' class='btn btn-success btn-block'>Register</button></a>
-  </form>
+
+  <div *ngIf="errorFlag"
+    class="alert alert-danger">
+    {{errorMsg}}
+  </div>
+
+  <h1>Login</h1>
+
+  <input [(ngModel)]='username' type='text' placeholder='username'/>
+  <input [(ngModel)]='password' type='password' placeholder='password'/>
+
+  <button (click)='login(username, password)' type='submit' class='btn btn-primary btn-block'>Login</button>
+
+
+  <a [routerLink]="['/register']">
+    <button (click)="buttonClicked($event)" type='button' class='btn btn-success btn-block'>Register</button>
+  </a>
 </div>
