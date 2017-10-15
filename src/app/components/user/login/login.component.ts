@@ -24,15 +24,11 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  login(username: string, password: string): void {
-    const user = this.userService.findUserByUsername(username);
-    if (username === user.username && password === user.password) {
+  login(): void {
+    console.log(this.username + ' test');
+    const user = this.userService.findUserByUsername(this.username);
+    if (this.username === user.username && this.password === user.password) {
       this.router.navigate(['user/' + user._id]);
     }
-  }
-
-  // binding click event
-  buttonClicked(event: any) {
-    console.log(event); // your custom code on button click
   }
 }

@@ -1,8 +1,10 @@
 <div class="container">
   <h1>Register</h1>
-  <input type='text' class='form-control' placeholder='username'>
-  <input type='password' class='form-control' placeholder='password'>
-  <input type='password' class='form-control' placeholder='verify password'>
-  <a href="profile.html"><button type='button' class='btn btn-primary btn-block'>Register</button></a>
-  <a href="login.html"><button type='button' class='btn btn-danger btn-block'>Cancel</button></a>
+  <input [(ngModel)]='username' type='text' class='form-control' placeholder='Please Enter A Username'>
+  <input [(ngModel)]='firstName' type='text' class='form-control' placeholder='Please Enter Your First Name'>
+  <input [(ngModel)]='lastName' type='text' class='form-control' placeholder='Please Enter Your Last Name'>
+  <input [(ngModel)]='password' type='password' class='form-control' placeholder='Please Enter A Password'>
+  <input [(ngModel)]='conf_password' type='password' class='form-control' placeholder='Verify Baby!'>
+  <button (click)='registerUser(username, firstName, lastName, password, conf_password)' type='button' class='btn btn-primary btn-block'>Register</button>
+  <a [routerLink]="['/login']"><button type='button' class='btn btn-danger btn-block'>Cancel</button></a>
 </div>

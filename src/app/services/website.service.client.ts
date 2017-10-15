@@ -31,11 +31,13 @@ export class WebsiteService {
 
   // retrieves the websites in local websites array whose developerId matches the parameter userId
   findWebsiteByUser(userId: string) {
+    var websiteArray = [];
     for (let i = 0; i < this.websites.length; i++ ) {
       if (this.websites[i].developerId === userId) {
-        return this.websites[i];
+        websiteArray.push(this.websites[i]);
       }
     }
+        return websiteArray;
   }
 
   // retrieves the website in local websites array whose _id matches the websiteId parameter

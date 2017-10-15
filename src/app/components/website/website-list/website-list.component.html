@@ -13,40 +13,18 @@
     </div>
   </div>
 </header>
+
 <div class='container'>
-  <div class='row salb-padder'>
+  <div class='row salb-padder' *ngFor="let website of websites">
     <div class='col-xs-8'>
-      <a href=''>Address Book App</a>
-    </div>
-    <div class='col-xs-4'>
-      <a href="website-edit.html"><span class='glyphicon glyphicon-cog pull-right salb-blue'></span></a>
-    </div>
-  </div>
-  <div class='row salb-padder'>
-    <div class='col-xs-8'>
-      <a href=''>Blogger</a>
-    </div>
-    <div class='col-xs-4'>
-      <a href="website-edit.html"><span class='glyphicon glyphicon-cog pull-right salb-blue'></span></a>
-    </div>
-  </div>
-  <div class='row salb-padder'>
-    <div class='col-xs-8'>
-      <a href=''>Blogging App</a>
-    </div>
-    <div class='col-xs-4'>
-      <a href="website-edit.html"><span class='glyphicon glyphicon-cog pull-right salb-blue'></span></a>
-    </div>
-  </div>
-  <div class='row salb-padder'>
-    <div class='col-xs-8'>
-      <a href=''>Script Testing App</a>
+      <a href=''>{{ website.name }}</a>
     </div>
     <div class='col-xs-4'>
       <a href="website-edit.html"><span class='glyphicon glyphicon-cog pull-right salb-blue'></span></a>
     </div>
   </div>
 </div>
+
 <footer class='bg-primary navbar-fixed-bottom'>
   <div class='container'>
     <a href="../user/profile.html"><span class='glyphicon glyphicon-user pull-right salb-glyphicon'></span></a>

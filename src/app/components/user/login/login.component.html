@@ -7,13 +7,15 @@
 
   <h1>Login</h1>
 
-  <input [(ngModel)]='username' type='text' placeholder='username'/>
-  <input [(ngModel)]='password' type='password' placeholder='password'/>
+  <form (ngSubmit) = "login()" #f="ngForm">
 
-  <button (click)='login(username, password)' type='submit' class='btn btn-primary btn-block'>Login</button>
+    <input name='username' type='text' placeholder='username' class='form-control' [(ngModel)]="username"/>
+    <input name='password' type='password' placeholder='password' class='form-control' [(ngModel)]="password"/>
 
+    <button type='submit' class='btn btn-primary btn-block'>Login</button>
+  </form>
 
   <a [routerLink]="['/register']">
-    <button (click)="buttonClicked($event)" type='button' class='btn btn-success btn-block'>Register</button>
+    <button type='button' class='btn btn-success btn-block'>Register</button>
   </a>
 </div>
