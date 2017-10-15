@@ -25,7 +25,5 @@ export class WebsiteListComponent implements OnInit {
       this.userId = params['userId'];
     });
     this.websites = this.getWebsiteList();
-    console.log(this.websites);
   }
-
 }

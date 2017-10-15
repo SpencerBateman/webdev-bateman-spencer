@@ -27,11 +27,13 @@ export class PageService {
 
   // retrieves the pages in local pages array whose websiteId matches the parameter websiteId
   findPageByWebsiteId(websiteId: string) {
+    const list_of_pages = [];
     for (let x = 0; x < this.pages.length; x ++) {
       if (websiteId === this.pages[x].websiteId) {
-        return this.pages[x];
+        list_of_pages.push(this.pages[x]);
       }
     }
+    return list_of_pages;
   }
 
   // retrieves the page in local pages array whose _id matches the pageId parameter

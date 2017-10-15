@@ -47,7 +47,6 @@ export class WebsiteService {
         return this.websites[i];
       }
     }
-
   }
 
   // updates the website in local websites array whose _id matches the websiteId parameter

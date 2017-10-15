@@ -14,6 +14,13 @@
   </div>
 </header>
 
+<div class='container'>
+  <div class='row salb-padder' *ngFor="let page of pages">
+    <div class='col-xs-8'>
+      <a [routerLink]="[]">{{ page.name }}</a>
+  </div>
+  </div>
+</div>
 <!-- This is the God container -->
 <div class='container'>
   <div class='row salb-padder'>
