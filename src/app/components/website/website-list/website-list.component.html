@@ -17,7 +17,7 @@
 <div class='container'>
   <div class='row salb-padder' *ngFor="let website of websites">
     <div class='col-xs-8'>
-      <a href=''>{{ website.name }}</a>
+      <a [routerLink]="['/user', userId, 'website', website._id, 'page']" >{{ website.name }}</a>
     </div>
     <div class='col-xs-4'>
       <a href="website-edit.html"><span class='glyphicon glyphicon-cog pull-right salb-blue'></span></a>
