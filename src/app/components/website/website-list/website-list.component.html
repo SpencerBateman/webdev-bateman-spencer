@@ -8,7 +8,7 @@
         <h1>Websites</h1>
       </div>
       <div class='col-xs-1'>
-        <a href="website-new.html"><span class='glyphicon glyphicon-plus pull-right salb-glyphicon'></span></a>
+        <a class='salb-white' [routerLink]="['./new']"><span class='glyphicon glyphicon-plus pull-right salb-glyphicon'></span></a>
       </div>
     </div>
   </div>
@@ -17,11 +17,10 @@
 <div class='container'>
   <div class='row salb-padder' *ngFor="let website of websites">
     <div class='col-xs-8'>
-
       <a [routerLink]="['/user', userId, 'website', website._id, 'page']" >{{ website.name }}</a>
     </div>
     <div class='col-xs-4'>
-      <a href="website-edit.html"><span class='glyphicon glyphicon-cog pull-right salb-blue'></span></a>
+      <a [routerLink]="['/user', userId, 'website', website._id]"><span class='glyphicon glyphicon-cog pull-right salb-blue'></span></a>
     </div>
   </div>
 </div>

@@ -21,45 +21,26 @@
 <div class='container'>
   <div class='row'>
     <div class='col-sm-4 hidden-xs'>
-      <div class='row salb-padder'>
+      <div class='row salb-padder' *ngFor="let website of websites">
         <div class='col-xs-8'>
-          <a href=''>Address Book App</a>
+          <a [routerLink]="['/user', userId, 'website', website._id, 'page']" >{{ website.name }}</a>
         </div>
         <div class='col-xs-4'>
-          <span class='glyphicon glyphicon-cog pull-right salb-blue'></span>
-        </div>
-      </div>
-      <div class='row salb-padder'>
-        <div class='col-xs-8'>
-          <a href=''>Blogger</a>
-        </div>
-        <div class='col-xs-4'>
-          <span class='glyphicon glyphicon-cog pull-right salb-blue'></span>
-        </div>
-      </div>
-      <div class='row salb-padder'>
-        <div class='col-xs-8'>
-          <a href=''>Blogging App</a>
-        </div>
-        <div class='col-xs-4'>
-          <span class='glyphicon glyphicon-cog pull-right salb-blue'></span>
-        </div>
-      </div>
-      <div class='row salb-padder'>
-        <div class='col-xs-8'>
-          <a href=''>Script Testing App</a>
-        </div>
-        <div class='col-xs-4'>
-          <span class='glyphicon glyphicon-cog pull-right salb-blue'></span>
+          <a [routerLink]="['/user', userId, 'website', website._id]"><span class='glyphicon glyphicon-cog pull-right salb-blue'></span></a>
         </div>
       </div>
     </div>
+
     <div class='col-sm-8 col-xs-12'>
       <h6>Name</h6>
-      <input type='text' class='form-control' placeholder='Name'>
-      <h6>Description</h6>
-      <textarea type='text' rows="4" class='form-control' placeholder='Description'></textarea>
-      <a href="website-list.html"><button type='button' class='btn btn-danger btn-block'>Delete</button></a>
+      <form (ngSubmit) = "editWebsite()" #f="ngForm">
+        <input name="websiteName" [(ngModel)]="websiteName" type='text' class='form-control' placeholder='Name'>
+        <h6>Description</h6>
+        <textarea name="websiteDescription" [(ngModel)]="websiteDescription" type='text' rows="4" class='form-control' placeholder='Description'></textarea>
+
+        <button type='submit' class='btn btn-success btn-block'>Update</button>
+      </form>
+        <button (click)="deleteWebsite()" type='button' class='btn btn-danger btn-block'>Delete</button>
     </div>
   </div>
 </div>

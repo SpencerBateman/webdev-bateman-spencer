@@ -18,41 +18,9 @@
   <div class='row salb-padder' *ngFor="let page of pages">
     <div class='col-xs-8'>
       <a [routerLink]="[]">{{ page.name }}</a>
-  </div>
-  </div>
-</div>
-<!-- This is the God container -->
-<div class='container'>
-  <div class='row salb-padder'>
-    <div class='col-xs-8'>
-      <a href='../widget/widget-list.html'>Address Book App</a>
     </div>
     <div class='col-xs-4'>
-      <a href="page-edit.html"><span class='glyphicon glyphicon-cog pull-right salb-blue'></span></a>
-    </div>
-  </div>
-  <div class='row salb-padder'>
-    <div class='col-xs-8'>
-      <a href='../widget/widget-list.html'>Blogger</a>
-    </div>
-    <div class='col-xs-4'>
-      <a href="page-edit.html"><span class='glyphicon glyphicon-cog pull-right salb-blue'></span></a>
-    </div>
-  </div>
-  <div class='row salb-padder'>
-    <div class='col-xs-8'>
-      <a href='../widget/widget-list.html'>Blogging App</a>
-    </div>
-    <div class='col-xs-4'>
-      <a href="page-edit.html"><span class='glyphicon glyphicon-cog pull-right salb-blue'></span></a>
-    </div>
-  </div>
-  <div class='row salb-padder'>
-    <div class='col-xs-8'>
-      <a href='../widget/widget-list.html'>Script Testing App</a>
-    </div>
-    <div class='col-xs-4'>
-      <a href="page-edit.html"><span class='glyphicon glyphicon-cog pull-right salb-blue'></span></a>
+      <a [routerLink]="[page._id]"><span class='glyphicon glyphicon-cog pull-right salb-blue'></span></a>
     </div>
   </div>
 </div>
