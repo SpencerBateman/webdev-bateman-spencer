@@ -838,7 +838,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/website/website-edit/website-edit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<header class='bg-primary'>\n  <div class='container'>\n    <div class='row'>\n      <div class='col-xs-2 col-sm-1'>\n        <a href=\"website-list.html\"><span class='glyphicon glyphicon-menu-left salb-glyphicon'></span></a>\n      </div>\n      <div class='col-sm-3 hidden-xs'>\n        <h1>Websites</h1>\n      </div>\n      <div class='col-xs-8 col-sm-7'>\n        <h1>Edit Website</h1>\n      </div>\n      <div class='col-xs-2 col-sm-1'>\n        <a href=\"website-list.html\"><span class='glyphicon glyphicon-ok pull-right salb-glyphicon'></span></a>\n      </div>\n    </div>\n  </div>\n</header>\n\n<!-- This is the God container -->\n<div class='container'>\n  <div class='row'>\n    <div class='col-sm-4 hidden-xs'>\n      <div class='row salb-padder' *ngFor=\"let website of websites\">\n        <div class='col-xs-8'>\n          <a [routerLink]=\"['/user', userId, 'website', website._id, 'page']\" >{{ website.name }}</a>\n        </div>\n        <div class='col-xs-4'>\n          <a [routerLink]=\"['/user', userId, 'website', website._id]\"><span class='glyphicon glyphicon-cog pull-right salb-blue'></span></a>\n        </div>\n      </div>\n    </div>\n    <div class='col-sm-8 col-xs-12'>\n      <h6>Name</h6>\n      <input type='text' class='form-control' placeholder='Name'>\n      <h6>Description</h6>\n      <textarea type='text' rows=\"4\" class='form-control' placeholder='Description'></textarea>\n      <a href=\"website-list.html\"><button type='button' class='btn btn-danger btn-block'>Delete</button></a>\n    </div>\n  </div>\n</div>\n\n<footer class='bg-primary navbar-fixed-bottom'>\n  <div class='container'>\n    <a href=\"../user/profile.html\"><span class='glyphicon glyphicon-user pull-right salb-glyphicon'></span></a>\n  </div>\n</footer>\n\n"
+module.exports = "<header class='bg-primary'>\n  <div class='container'>\n    <div class='row'>\n      <div class='col-xs-2 col-sm-1'>\n        <a href=\"website-list.html\"><span class='glyphicon glyphicon-menu-left salb-glyphicon'></span></a>\n      </div>\n      <div class='col-sm-3 hidden-xs'>\n        <h1>Websites</h1>\n      </div>\n      <div class='col-xs-8 col-sm-7'>\n        <h1>Edit Website</h1>\n      </div>\n      <div class='col-xs-2 col-sm-1'>\n        <a href=\"website-list.html\"><span class='glyphicon glyphicon-ok pull-right salb-glyphicon'></span></a>\n      </div>\n    </div>\n  </div>\n</header>\n\n<!-- This is the God container -->\n<div class='container'>\n  <div class='row'>\n    <div class='col-sm-4 hidden-xs'>\n      <div class='row salb-padder' *ngFor=\"let website of websites\">\n        <div class='col-xs-8'>\n          <a [routerLink]=\"['/user', userId, 'website', website._id, 'page']\" >{{ website.name }}</a>\n        </div>\n        <div class='col-xs-4'>\n          <a [routerLink]=\"['/user', userId, 'website', website._id]\"><span class='glyphicon glyphicon-cog pull-right salb-blue'></span></a>\n        </div>\n      </div>\n    </div>\n\n    <div class='col-sm-8 col-xs-12'>\n      <h6>Name</h6>\n      <form (ngSubmit) = \"editWebsite()\" #f=\"ngForm\">\n        <input name=\"websiteName\" [(ngModel)]=\"websiteName\" type='text' class='form-control' placeholder='Name'>\n        <h6>Description</h6>\n        <textarea name=\"websiteDescription\" [(ngModel)]=\"websiteDescription\" type='text' rows=\"4\" class='form-control' placeholder='Description'></textarea>\n\n        <button type='submit' class='btn btn-success btn-block'>Update</button>\n      </form>\n        <button (click)=\"deleteWebsite()\" type='button' class='btn btn-danger btn-block'>Delete</button>\n    </div>\n  </div>\n</div>\n\n<footer class='bg-primary navbar-fixed-bottom'>\n  <div class='container'>\n    <a href=\"../user/profile.html\"><span class='glyphicon glyphicon-user pull-right salb-glyphicon'></span></a>\n  </div>\n</footer>\n\n"
 
 /***/ }),
 
@@ -862,18 +862,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var WebsiteEditComponent = (function () {
-    function WebsiteEditComponent(websiteService, activatedRoute) {
+    function WebsiteEditComponent(websiteService, activatedRoute, router) {
         this.websiteService = websiteService;
         this.activatedRoute = activatedRoute;
+        this.router = router;
     }
     WebsiteEditComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.activatedRoute.params.subscribe(function (params) {
             _this.userId = params['userId'];
-            _this.websiteId = params['website._id'];
+            _this.websiteId = params['wid'];
         });
+        this.website = this.websiteService.findWebsiteById(this.websiteId);
         this.websites = this.websiteService.findWebsiteByUser(this.userId);
+        this.websiteName = this.website.name;
+        this.websiteDescription = this.website.description;
+    };
+    WebsiteEditComponent.prototype.editWebsite = function () {
+        this.website.name = this.websiteName;
+        this.website.description = this.websiteDescription;
+        this.websiteService.updateWebsite(this.websiteId, this.website);
+        this.router.navigate(['./user', this.userId, 'website', this.websiteId]);
+    };
+    WebsiteEditComponent.prototype.deleteWebsite = function () {
+        this.websiteService.deleteWebsite(this.websiteId);
+        this.router.navigate(['./user', this.userId, 'website']);
     };
     return WebsiteEditComponent;
 }());
@@ -883,10 +898,10 @@ WebsiteEditComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/website/website-edit/website-edit.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/website/website-edit/website-edit.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_website_service_client__["a" /* WebsiteService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_website_service_client__["a" /* WebsiteService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_website_service_client__["a" /* WebsiteService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_website_service_client__["a" /* WebsiteService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _c || Object])
 ], WebsiteEditComponent);
 
-var _a, _b;
+var _a, _b, _c;
 //# sourceMappingURL=website-edit.component.js.map
 
 /***/ }),
@@ -912,7 +927,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/website/website-list/website-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<header class='bg-primary'>\n  <div class='container'>\n    <div class='row'>\n      <div class='col-xs-1'>\n        <a href=\"../user/profile.html\"><span class='glyphicon glyphicon-menu-left salb-glyphicon'></span></a>\n      </div>\n      <div class='col-xs-8'>\n        <h1>Websites</h1>\n      </div>\n      <div class='col-xs-1'>\n        <a href=\"website-new.html\"><span class='glyphicon glyphicon-plus pull-right salb-glyphicon'></span></a>\n      </div>\n    </div>\n  </div>\n</header>\n\n<div class='container'>\n  <div class='row salb-padder' *ngFor=\"let website of websites\">\n    <div class='col-xs-8'>\n      <a [routerLink]=\"['/user', userId, 'website', website._id, 'page']\" >{{ website.name }}</a>\n    </div>\n    <div class='col-xs-4'>\n      <a [routerLink]=\"['/user', userId, 'website', website._id]\"><span class='glyphicon glyphicon-cog pull-right salb-blue'></span></a>\n    </div>\n  </div>\n</div>\n\n<footer class='bg-primary navbar-fixed-bottom'>\n  <div class='container'>\n    <a href=\"../user/profile.html\"><span class='glyphicon glyphicon-user pull-right salb-glyphicon'></span></a>\n  </div>\n</footer>\n\n"
+module.exports = "<header class='bg-primary'>\n  <div class='container'>\n    <div class='row'>\n      <div class='col-xs-1'>\n        <a href=\"../user/profile.html\"><span class='glyphicon glyphicon-menu-left salb-glyphicon'></span></a>\n      </div>\n      <div class='col-xs-8'>\n        <h1>Websites</h1>\n      </div>\n      <div class='col-xs-1'>\n        <a class='salb-white' [routerLink]=\"['./new']\"><span class='glyphicon glyphicon-plus pull-right salb-glyphicon'></span></a>\n      </div>\n    </div>\n  </div>\n</header>\n\n<div class='container'>\n  <div class='row salb-padder' *ngFor=\"let website of websites\">\n    <div class='col-xs-8'>\n      <a [routerLink]=\"['/user', userId, 'website', website._id, 'page']\" >{{ website.name }}</a>\n    </div>\n    <div class='col-xs-4'>\n      <a [routerLink]=\"['/user', userId, 'website', website._id]\"><span class='glyphicon glyphicon-cog pull-right salb-blue'></span></a>\n    </div>\n  </div>\n</div>\n\n<footer class='bg-primary navbar-fixed-bottom'>\n  <div class='container'>\n    <a href=\"../user/profile.html\"><span class='glyphicon glyphicon-user pull-right salb-glyphicon'></span></a>\n  </div>\n</footer>\n\n"
 
 /***/ }),
 
@@ -988,7 +1003,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/website/website-new/website-new.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<header class='bg-primary'>\n  <div class='container'>\n    <div class='row'>\n      <div class='col-xs-2 col-sm-1'>\n        <a href=\"website-list.html\"><span class='glyphicon glyphicon-menu-left salb-glyphicon'></span></a>\n      </div>\n      <div class='col-sm-3 hidden-xs'>\n        <h1>Websites</h1>\n      </div>\n      <div class='col-xs-8 col-sm-7'>\n        <h1>New Website</h1>\n      </div>\n      <div class='col-xs-2 col-sm-1'>\n        <a href=\"website-list.html\"><span class='glyphicon glyphicon-ok pull-right salb-glyphicon'></span></a>\n      </div>\n    </div>\n  </div>\n</header>\n\n<!-- This is the God container -->\n<div class='container'>\n  <div class='row'>\n    <div class='col-sm-4 hidden-xs'>\n      <div class='row salb-padder'>\n        <div class='col-xs-8'>\n          <a href=''>Address Book App</a>\n        </div>\n        <div class='col-xs-4'>\n          <span class='glyphicon glyphicon-cog pull-right salb-blue'></span>\n        </div>\n      </div>\n      <div class='row salb-padder'>\n        <div class='col-xs-8'>\n          <a href=''>Blogger</a>\n        </div>\n        <div class='col-xs-4'>\n          <span class='glyphicon glyphicon-cog pull-right salb-blue'></span>\n        </div>\n      </div>\n      <div class='row salb-padder'>\n        <div class='col-xs-8'>\n          <a href=''>Blogging App</a>\n        </div>\n        <div class='col-xs-4'>\n          <span class='glyphicon glyphicon-cog pull-right salb-blue'></span>\n        </div>\n      </div>\n      <div class='row salb-padder'>\n        <div class='col-xs-8'>\n          <a href=''>Script Testing App</a>\n        </div>\n        <div class='col-xs-4'>\n          <span class='glyphicon glyphicon-cog pull-right salb-blue'></span>\n        </div>\n      </div>\n    </div>\n    <div class='col-sm-8 col-xs-12'>\n      <h6>Name</h6>\n      <input type='text' class='form-control' placeholder='Name'>\n      <h6>Description</h6>\n      <textarea type='text' rows=\"4\" class='form-control' placeholder='Description'></textarea>\n    </div>\n  </div>\n</div>\n\n<footer class='bg-primary navbar-fixed-bottom'>\n  <div class='container'>\n    <a href=\"../user/profile.html\"><span class='glyphicon glyphicon-user pull-right salb-glyphicon'></span></a>\n  </div>\n</footer>\n"
+module.exports = "<header class='bg-primary'>\n  <div class='container'>\n    <div class='row'>\n      <div class='col-xs-2 col-sm-1'>\n        <a href=\"website-list.html\"><span class='glyphicon glyphicon-menu-left salb-glyphicon'></span></a>\n      </div>\n      <div class='col-sm-3 hidden-xs'>\n        <h1>Websites</h1>\n      </div>\n      <div class='col-xs-8 col-sm-7'>\n        <h1>New Website</h1>\n      </div>\n      <div class='col-xs-2 col-sm-1'>\n        <a href=\"website-list.html\"><span class='glyphicon glyphicon-ok pull-right salb-glyphicon'></span></a>\n      </div>\n    </div>\n  </div>\n</header>\n\n<!-- This is the God container -->\n<div class='container'>\n  <div class='row'>\n    <div class='col-sm-4 hidden-xs'>\n      <div class='row salb-padder' *ngFor=\"let website of websites\">\n        <div class='col-xs-8'>\n          <a [routerLink]=\"['/user', userId, 'website', website._id, 'page']\" >{{ website.name }}</a>\n        </div>\n        <div class='col-xs-4'>\n          <a [routerLink]=\"['/user', userId, 'website', website._id]\"><span class='glyphicon glyphicon-cog pull-right salb-blue'></span></a>\n        </div>\n      </div>\n    </div>\n    <div class='col-sm-8 col-xs-12'>\n      <h6>Name</h6>\n      <form (ngSubmit) = \"createWebsite()\" #f=\"ngForm\">\n      <input name=\"websiteName\" [(ngModel)]=\"websiteName\" type='text' class='form-control' placeholder='Name'>\n      <h6>Description</h6>\n      <textarea name=\"websiteDescription\" [(ngModel)]=\"websiteDescription\" type='text' rows=\"4\" class='form-control' placeholder='Description'></textarea>\n        <button type='submit' class='btn btn-primary btn-block'>Create</button>\n    </form>\n    </div>\n  </div>\n</div>\n\n<footer class='bg-primary navbar-fixed-bottom'>\n  <div class='container'>\n    <a href=\"../user/profile.html\"><span class='glyphicon glyphicon-user pull-right salb-glyphicon'></span></a>\n  </div>\n</footer>\n"
 
 /***/ }),
 
@@ -998,6 +1013,8 @@ module.exports = "<header class='bg-primary'>\n  <div class='container'>\n    <d
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WebsiteNewComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_website_service_client__ = __webpack_require__("../../../../../src/app/services/website.service.client.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1008,10 +1025,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
 var WebsiteNewComponent = (function () {
-    function WebsiteNewComponent() {
+    function WebsiteNewComponent(websiteService, activatedRoute, router) {
+        this.websiteService = websiteService;
+        this.activatedRoute = activatedRoute;
+        this.router = router;
     }
     WebsiteNewComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.activatedRoute.params.subscribe(function (params) {
+            _this.userId = params['userId'];
+        });
+        this.websites = this.websiteService.findWebsiteByUser(this.userId);
+        this.website = [];
+    };
+    WebsiteNewComponent.prototype.createWebsite = function () {
+        var new_website = { _id: 0, name: this.websiteName, developerId: this.userId, description: this.websiteDescription };
+        console.log(this.websiteService.createWebsite(this.userId, new_website));
+        this.router.navigate(['./user', this.userId, 'website']);
     };
     return WebsiteNewComponent;
 }());
@@ -1021,9 +1055,10 @@ WebsiteNewComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/website/website-new/website-new.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/website/website-new/website-new.component.css")]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_website_service_client__["a" /* WebsiteService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_website_service_client__["a" /* WebsiteService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _c || Object])
 ], WebsiteNewComponent);
 
+var _a, _b, _c;
 //# sourceMappingURL=website-new.component.js.map
 
 /***/ }),

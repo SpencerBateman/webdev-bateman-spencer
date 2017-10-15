@@ -35,7 +35,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".salb-vcenter {\n  display: inline-block;\n  vertical-align: middle;\n  float: none;\n}\n", ""]);
+exports.push([module.i, ".salb-vcenter {\n  display: inline-block;\n  vertical-align: middle;\n  float: none;\n}\n\n.salb-white {\n  color: white;\n}\n", ""]);
 
 // exports
 
