@@ -23,11 +23,11 @@ export class WebsiteEditComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: any) => {
       this.userId = params['userId'];
       this.websiteId = params['wid'];
+      this.website = this.websiteService.findWebsiteById(this.websiteId);
+      this.websites = this.websiteService.findWebsiteByUser(this.userId);
+      this.websiteName = this.website.name;
+      this.websiteDescription = this.website.description;
     });
-    this.website = this.websiteService.findWebsiteById(this.websiteId);
-    this.websites = this.websiteService.findWebsiteByUser(this.userId);
-    this.websiteName = this.website.name;
-    this.websiteDescription = this.website.description;
   }
 
   editWebsite() {

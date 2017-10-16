@@ -22,9 +22,9 @@ export class WebsiteNewComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: any) => {
       this.userId = params['userId'];
+      this.websites = this.websiteService.findWebsiteByUser(this.userId);
+      this.website = [];
     });
-    this.websites = this.websiteService.findWebsiteByUser(this.userId);
-    this.website = [];
   }
 
   createWebsite() {

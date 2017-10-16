@@ -24,11 +24,11 @@ export class PageEditComponent implements OnInit {
       this.userId = params['userId'];
       this.websiteId = params['wid'];
       this.pageId = params['pid']
+      this.page = this.pageService.findPageById(this.pageId);
+      this.pageName = this.page.name;
+      this.pageDescription = this.page.description;
     });
 
-    this.page = this.pageService.findPageById(this.pageId);
-    this.pageName = this.page.name;
-    this.pageDescription = this.page.description;
   }
 
   deletePage() {

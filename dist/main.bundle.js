@@ -351,10 +351,10 @@ var PageEditComponent = (function () {
             _this.userId = params['userId'];
             _this.websiteId = params['wid'];
             _this.pageId = params['pid'];
+            _this.page = _this.pageService.findPageById(_this.pageId);
+            _this.pageName = _this.page.name;
+            _this.pageDescription = _this.page.description;
         });
-        this.page = this.pageService.findPageById(this.pageId);
-        this.pageName = this.page.name;
-        this.pageDescription = this.page.description;
     };
     PageEditComponent.prototype.deletePage = function () {
         this.pageService.deletePage(this.pageId);
@@ -438,7 +438,6 @@ var PageListComponent = (function () {
             _this.userId = params['userId'];
             _this.websiteId = params['wid'];
             _this.pages = _this.pageService.findPageByWebsiteId(_this.websiteId);
-            console.log(_this.pages);
         });
     };
     return PageListComponent;
@@ -766,18 +765,16 @@ var ProfileComponent = (function () {
     }
     ProfileComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.activatedRoute.params
-            .subscribe(function (params) {
+        this.activatedRoute.params.subscribe(function (params) {
             _this.userId = params['userId'];
+            _this.user = _this.userService.findUserById(_this.userId);
+            _this.username = _this.user['username'];
+            _this.firstName = _this.user['firstName'];
+            _this.lastName = _this.user['lastName'];
         });
-        this.user = this.userService.findUserById(this.userId);
-        this.username = this.user['username'];
-        this.firstName = this.user['firstName'];
-        this.lastName = this.user['lastName'];
     };
     ProfileComponent.prototype.updateProfile = function () {
         this.userService.updateUser(this.userId, this.user);
-        console.log('update');
         this.router.navigate(['/user', this.userId]);
     };
     return ProfileComponent;
@@ -928,11 +925,11 @@ var WebsiteEditComponent = (function () {
         this.activatedRoute.params.subscribe(function (params) {
             _this.userId = params['userId'];
             _this.websiteId = params['wid'];
+            _this.website = _this.websiteService.findWebsiteById(_this.websiteId);
+            _this.websites = _this.websiteService.findWebsiteByUser(_this.userId);
+            _this.websiteName = _this.website.name;
+            _this.websiteDescription = _this.website.description;
         });
-        this.website = this.websiteService.findWebsiteById(this.websiteId);
-        this.websites = this.websiteService.findWebsiteByUser(this.userId);
-        this.websiteName = this.website.name;
-        this.websiteDescription = this.website.description;
     };
     WebsiteEditComponent.prototype.editWebsite = function () {
         this.website.name = this.websiteName;
@@ -1017,8 +1014,8 @@ var WebsiteListComponent = (function () {
         var _this = this;
         this.activatedRoute.params.subscribe(function (params) {
             _this.userId = params['userId'];
+            _this.websites = _this.getWebsiteList();
         });
-        this.websites = this.getWebsiteList();
     };
     return WebsiteListComponent;
 }());
@@ -1092,9 +1089,9 @@ var WebsiteNewComponent = (function () {
         var _this = this;
         this.activatedRoute.params.subscribe(function (params) {
             _this.userId = params['userId'];
+            _this.websites = _this.websiteService.findWebsiteByUser(_this.userId);
+            _this.website = [];
         });
-        this.websites = this.websiteService.findWebsiteByUser(this.userId);
-        this.website = [];
     };
     WebsiteNewComponent.prototype.createWebsite = function () {
         if (this.websiteName != null && this.websiteDescription != null) {
@@ -1140,7 +1137,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/widget/widget-chooser/widget-chooser.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<header class='salb-bg-grey'>\n  <div class='container'>\n    <div class='row'>\n      <div class=\"col-xs-2\">\n        <a href=\"widget-list.html\"><span class='glyphicon glyphicon-menu-left salb-glyphicon salb-dark'></span></a>\n      </div>\n      <div class='col-xs-10'>\n        <h1>Choose Widget</h1>\n      </div>\n    </div>\n  </div>\n</header>\n\n<!-- This is the God container -->\n<div class='container'>\n  <div class='row salb-padder'>\n    <div class='col-xs-12'>\n      <a href='widget-heading.html'>Header</a>\n    </div>\n  </div>\n  <div class='row salb-padder'>\n    <div class='col-xs-12'>\n      <a href=''>Label</a>\n    </div>\n  </div>\n  <div class='row salb-padder'>\n    <div class='col-xs-12'>\n      <a href=''>HTML</a>\n    </div>\n  </div>\n  <div class='row salb-padder'>\n    <div class='col-xs-12'>\n      <a href=''>Text Input</a>\n    </div>\n  </div>\n  <div class='row salb-padder'>\n    <div class='col-xs-12'>\n      <a href=''>Link</a>\n    </div>\n  </div>\n  <div class='row salb-padder'>\n    <div class='col-xs-12'>\n      <a href=''>Button</a>\n    </div>\n  </div>\n  <div class='row salb-padder'>\n    <div class='col-xs-12'>\n      <a href='widget-image.html'>Image</a>\n    </div>\n  </div>\n  <div class='row salb-padder'>\n    <div class='col-xs-12'>\n      <a href='widget-youtube.html'>Youtube</a>\n    </div>\n  </div>\n  <div class='row salb-padder'>\n    <div class='col-xs-12'>\n      <a href=''>Data Table</a>\n    </div>\n  </div>\n  <div class='row salb-padder'>\n    <div class='col-xs-12'>\n      <a href=''>Repeater</a>\n    </div>\n  </div>\n</div>\n\n<footer class='salb-bg-grey navbar-fixed-bottom'>\n  <div class='container'>\n    <a href=\"../user/profile.html\"><span class='glyphicon glyphicon-user salb-blue pull-right salb-glyphicon'></span></a>\n  </div>\n</footer>\n\n"
+module.exports = "<header class='salb-bg-grey'>\n  <div class='container'>\n    <div class='row'>\n      <div class=\"col-xs-2\">\n        <a [routerLink]=\"['/user', userId, 'website', websiteId, 'page', pageId, 'widget']\"><span class='glyphicon glyphicon-menu-left salb-glyphicon salb-dark'></span></a>\n      </div>\n      <div class='col-xs-10'>\n        <h1>Choose Widget</h1>\n      </div>\n    </div>\n  </div>\n</header>\n\n<!-- This is the God container -->\n<div class='container'>\n  <div class='row salb-padder'>\n    <div class='col-xs-12'>\n      <a href='widget-heading.html'>Header</a>\n    </div>\n  </div>\n  <div class='row salb-padder'>\n    <div class='col-xs-12'>\n      <a href=''>Label</a>\n    </div>\n  </div>\n  <div class='row salb-padder'>\n    <div class='col-xs-12'>\n      <a href=''>HTML</a>\n    </div>\n  </div>\n  <div class='row salb-padder'>\n    <div class='col-xs-12'>\n      <a href=''>Text Input</a>\n    </div>\n  </div>\n  <div class='row salb-padder'>\n    <div class='col-xs-12'>\n      <a href=''>Link</a>\n    </div>\n  </div>\n  <div class='row salb-padder'>\n    <div class='col-xs-12'>\n      <a href=''>Button</a>\n    </div>\n  </div>\n  <div class='row salb-padder'>\n    <div class='col-xs-12'>\n      <a href='widget-image.html'>Image</a>\n    </div>\n  </div>\n  <div class='row salb-padder'>\n    <div class='col-xs-12'>\n      <a href='widget-youtube.html'>Youtube</a>\n    </div>\n  </div>\n  <div class='row salb-padder'>\n    <div class='col-xs-12'>\n      <a href=''>Data Table</a>\n    </div>\n  </div>\n  <div class='row salb-padder'>\n    <div class='col-xs-12'>\n      <a href=''>Repeater</a>\n    </div>\n  </div>\n</div>\n\n<footer class='salb-bg-grey navbar-fixed-bottom'>\n  <div class='container'>\n    <a [routerLink]=\"['/user', userId]\"><span class='glyphicon glyphicon-user salb-blue pull-right salb-glyphicon'></span></a>\n  </div>\n</footer>\n\n"
 
 /***/ }),
 
@@ -1150,6 +1147,8 @@ module.exports = "<header class='salb-bg-grey'>\n  <div class='container'>\n    
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WidgetChooserComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_widget_service_client__ = __webpack_require__("../../../../../src/app/services/widget.service.client.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1160,10 +1159,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var WidgetChooserComponent = (function () {
-    function WidgetChooserComponent() {
+    function WidgetChooserComponent(widgetService, activatedRoute) {
+        this.widgetService = widgetService;
+        this.activatedRoute = activatedRoute;
     }
     WidgetChooserComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.activatedRoute.params.subscribe(function (params) {
+            _this.userId = params['userId'];
+            _this.websiteId = params['wid'];
+            _this.pageId = params['pid'];
+        });
     };
     return WidgetChooserComponent;
 }());
@@ -1173,9 +1182,10 @@ WidgetChooserComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/widget/widget-chooser/widget-chooser.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/widget/widget-chooser/widget-chooser.component.css")]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_widget_service_client__["a" /* WidgetService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_widget_service_client__["a" /* WidgetService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _b || Object])
 ], WidgetChooserComponent);
 
+var _a, _b;
 //# sourceMappingURL=widget-chooser.component.js.map
 
 /***/ }),
@@ -1201,7 +1211,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/widget/widget-edit/widget-edit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div [ngSwitch]=\"widget.type\">\n  <div *ngSwitchCase='header'>\n    <app-widget-header></app-widget-header>\n  </div>\n\n  <div *ngSwitchCase='image'>\n    <app-widget-image></app-widget-image>\n  </div>\n\n  <div *ngSwitchCase='youtube'>\n    <app-widget-youtube></app-widget-youtube>\n  </div>\n\n</div>\n\n"
+module.exports = "<header class='salb-bg-grey'>\n  <div class='container'>\n    <div class='row'>\n      <div class='col-xs-1'>\n        <a [routerLink]=\"['/user', userId, 'website', websiteId, 'page', pageId, 'widget']\"> <span class='glyphicon glyphicon-menu-left salb-glyphicon salb-dark'></span></a>\n      </div>\n      <div class='col-xs-5'>\n        <h1>Widget Edit</h1>\n      </div>\n      <div class='col-xs-6'>\n        <a (click)=\"updateWidget()\"><span class='glyphicon glyphicon-ok pull-right salb-glyphicon salb-dark'></span></a>\n      </div>\n    </div>\n  </div>\n</header>\n<div [ngSwitch]=\"widget.widgetType\">\n  <div *ngSwitchCase=\"'HEADING'\">\n    <app-widget-header></app-widget-header>\n  </div>\n\n  <div *ngSwitchCase=\"'IMAGE'\">\n    <app-widget-image></app-widget-image>\n  </div>\n\n  <div *ngSwitchCase=\"'YOUTUBE'\">\n    <app-widget-youtube></app-widget-youtube>\n  </div>\n\n</div>\n<footer class='salb-bg-grey navbar-fixed-bottom'>\n  <div class='container'>\n    <a [routerLink]=\"['/user', userId]\"><span class='glyphicon glyphicon-user salb-blue pull-right salb-glyphicon'></span></a>\n  </div>\n</footer>\n"
 
 /***/ }),
 
@@ -1211,6 +1221,8 @@ module.exports = "<div [ngSwitch]=\"widget.type\">\n  <div *ngSwitchCase='header
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WidgetEditComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_widget_service_client__ = __webpack_require__("../../../../../src/app/services/widget.service.client.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1221,10 +1233,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
 var WidgetEditComponent = (function () {
-    function WidgetEditComponent() {
+    function WidgetEditComponent(widgetService, router, activatedRoute) {
+        this.widgetService = widgetService;
+        this.router = router;
+        this.activatedRoute = activatedRoute;
     }
     WidgetEditComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.activatedRoute.params.subscribe(function (params) {
+            _this.userId = params['userId'];
+            _this.websiteId = params['wid'];
+            _this.pageId = params['pid'];
+            _this.widgetId = params['wgid'];
+        });
+        this.widget = this.widgetService.findWidgetById(this.widgetId);
+        this.widgetName = this.widget.name;
+        this.widgetText = this.widget.text;
+        this.widgetSize = this.widget.size;
+    };
+    WidgetEditComponent.prototype.updateWidget = function () {
+        this.widget.name = this.widgetName;
+        this.widget.text = this.widgetText;
+        this.widget.size = this.widgetSize;
+        this.widgetService.updateWidget(this.widgetId, this.widget);
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
     };
     return WidgetEditComponent;
 }());
@@ -1234,9 +1270,10 @@ WidgetEditComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/widget/widget-edit/widget-edit.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/widget/widget-edit/widget-edit.component.css")]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_widget_service_client__["a" /* WidgetService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_widget_service_client__["a" /* WidgetService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object])
 ], WidgetEditComponent);
 
+var _a, _b, _c;
 //# sourceMappingURL=widget-edit.component.js.map
 
 /***/ }),
@@ -1262,7 +1299,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/widget/widget-edit/widget-header/widget-header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<header class='salb-bg-grey'>\n  <div class='container'>\n    <div class='row'>\n      <div class='col-xs-1'>\n        <a href=\"widget-list.html\"> <span class='glyphicon glyphicon-menu-left salb-glyphicon salb-dark'></span></a>\n      </div>\n      <div class='col-xs-5'>\n        <h1>Widget Edit</h1>\n      </div>\n      <div class='col-xs-6'>\n        <a href=\"widget-list.html\"><span class='glyphicon glyphicon-ok pull-right salb-glyphicon salb-dark'></span></a>\n      </div>\n    </div>\n  </div>\n</header>\n\n<!-- This is the God container -->\n<div class='container'>\n  <h6>Name</h6>\n  <input type='text' class='form-control' placeholder='Name'>\n  <h6>Text</h6>\n  <input type='text' class='form-control' placeholder='Put your text here'>\n  <h6>Size</h6>\n  <input type='text' class='form-control' placeholder='Size'>\n  <a href=\"widget-list.html\"><button type='button' class='btn btn-danger btn-block'>Delete</button></a>\n</div>\n\n<footer class='salb-bg-grey navbar-fixed-bottom'>\n  <div class='container'>\n    <a href=\"../user/profile.html\"><span class='glyphicon glyphicon-user salb-blue pull-right salb-glyphicon'></span></a>\n  </div>\n</footer>\n"
+module.exports = "<!-- This is the God container -->\n<div class='container'>\n  <h6>Name</h6>\n  <input [(ngModel)]=\"widgetName\" name=\"widgetName\" type='text' class='form-control' placeholder='Name'>\n  <h6>Text</h6>\n  <input [(ngModel)]=\"widgetText\" name=\"widgetText\" type='text' class='form-control' placeholder='Put your text here'>\n  <h6>Size</h6>\n  <input [(ngModel)]=\"widgetSize\" name=\"widgetSize\" type='text' class='form-control' placeholder='Size'>\n  <a href=\"widget-list.html\"><button type='button' class='btn btn-danger btn-block'>Delete</button></a>\n</div>\n"
 
 /***/ }),
 
@@ -1323,7 +1360,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/widget/widget-edit/widget-image/widget-image.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<header class='salb-bg-grey'>\n  <div class='container'>\n    <div class='row'>\n      <div class='col-xs-1'>\n        <a href=\"widget-list.html\"><span class='glyphicon glyphicon-menu-left salb-glyphicon salb-dark'></span></a>\n      </div>\n      <div class='col-xs-5'>\n        <h1>Widget Edit</h1>\n      </div>\n      <div class='col-xs-6'>\n        <a href=\"widget-list.html\"><span class='glyphicon glyphicon-ok pull-right salb-glyphicon salb-dark'></span></a>\n      </div>\n    </div>\n  </div>\n</header>\n\n<!-- This is the God container -->\n<div class='container'>\n  <h6>Name</h6>\n  <input type='text' class='form-control' placeholder='Name'>\n  <h6>Text</h6>\n  <input type='text' class='form-control' placeholder='Text goes here'>\n  <h6>Url</h6>\n  <input type='text' class='form-control' placeholder='paste your url'>\n  <h6>Width</h6>\n  <input type='text' class='form-control' placeholder='100%'>\n  <h6>Upload</h6>\n  <input type=\"file\" name=\"pic\" accept=\"image/*\">\n  <button type='button' class='btn btn-primary btn-block'>Upload Image</button>\n  <a href=\"widget-list.html\"><button type='button' class='btn btn-danger btn-block'>Delete</button></a>\n</div>\n\n<footer class='salb-bg-grey navbar-fixed-bottom'>\n  <div class='container'>\n    <a href=\"../user/profile.html\"><span class='glyphicon glyphicon-user salb-blue pull-right salb-glyphicon'></span></a>\n  </div>\n</footer>\n\n"
+module.exports = "<!-- This is the God container -->\n<div class='container'>\n  <h6>Name</h6>\n  <input type='text' class='form-control' placeholder='Name'>\n  <h6>Text</h6>\n  <input type='text' class='form-control' placeholder='Text goes here'>\n  <h6>Url</h6>\n  <input type='text' class='form-control' placeholder='paste your url'>\n  <h6>Width</h6>\n  <input type='text' class='form-control' placeholder='100%'>\n  <h6>Upload</h6>\n  <input type=\"file\" name=\"pic\" accept=\"image/*\">\n  <button type='button' class='btn btn-primary btn-block'>Upload Image</button>\n  <a href=\"widget-list.html\"><button type='button' class='btn btn-danger btn-block'>Delete</button></a>\n</div>\n"
 
 /***/ }),
 
@@ -1384,7 +1421,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/widget/widget-edit/widget-youtube/widget-youtube.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<header class='salb-bg-grey'>\n  <div class='container'>\n    <div class='row'>\n      <div class='col-xs-1'>\n        <a href=\"widget-list.html\"><span class='glyphicon glyphicon-menu-left salb-glyphicon salb-dark'></span></a>\n      </div>\n      <div class='col-xs-5'>\n        <h1>Widget Edit</h1>\n      </div>\n      <div class='col-xs-6'>\n        <a href=\"widget-list.html\"><span class='glyphicon glyphicon-plus pull-right salb-glyphicon salb-dark'></span></a>\n      </div>\n    </div>\n  </div>\n</header>\n\n<!-- This is the God container -->\n<div class='container'>\n  <h6>Name</h6>\n  <input type='text' class='form-control' placeholder='Name'>\n  <h6>Text</h6>\n  <input type='text' class='form-control' placeholder='Text goes here'>\n  <h6>Url</h6>\n  <input type='text' class='form-control' placeholder='paste your url'>\n  <h6>Width</h6>\n  <input type='text' class='form-control' placeholder='100%'>\n\n  <a href=\"widget-list.html\"><button type='button' class='btn btn-danger btn-block'>Delete</button></a>\n</div>\n\n<footer class='salb-bg-grey navbar-fixed-bottom'>\n  <div class='container'>\n    <a href=\"../user/profile.html\"><span class='glyphicon glyphicon-user salb-blue pull-right salb-glyphicon'></span></a>\n  </div>\n</footer>\n"
+module.exports = "<!-- This is the God container -->\n<div class='container'>\n  <h6>Name</h6>\n  <input type='text' class='form-control' placeholder='Name'>\n  <h6>Text</h6>\n  <input type='text' class='form-control' placeholder='Text goes here'>\n  <h6>Url</h6>\n  <input type='text' class='form-control' placeholder='paste your url'>\n  <h6>Width</h6>\n  <input type='text' class='form-control' placeholder='100%'>\n  <a href=\"widget-list.html\"><button type='button' class='btn btn-danger btn-block'>Delete</button></a>\n</div>\n"
 
 /***/ }),
 
@@ -1445,7 +1482,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/widget/widget-list/widget-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<header class='salb-bg-grey'>\n  <div class='container'>\n    <div class='row'>\n      <div class='col-xs-1'>\n        <a [routerLink]=\"['/user', userId, 'website', websiteId, 'page']\"><span class='glyphicon glyphicon-menu-left salb-glyphicon salb-dark'></span></a>\n      </div>\n      <div class='col-xs-5'>\n        <h1>Widgets</h1>\n      </div>\n      <div class='col-xs-6'>\n        <a href=\"widget-choose.html\"><span class='glyphicon glyphicon-plus pull-right salb-glyphicon salb-dark'></span></a>\n      </div>\n    </div>\n  </div>\n</header>\n\n<div class='container'>\n  <div *ngFor=\"let widget of widgets\">\n\n    <div [ngSwitch]=\"widget.widgetType\">\n\n      <div *ngSwitchCase=\"'HEADING'\">\n        <div class='salb-widget'>\n          <div class='salb-widget__box'>\n            <a href=\"widget-heading.html\"><span class='glyphicon glyphicon-cog salb-glyphicon salb-blue'></span></a>\n            <span class='glyphicon glyphicon-align-justify salb-glyphicon'></span>\n          </div>\n          <h1>This is a heading</h1>\n        </div>\n      </div>\n\n      <div *ngSwitchCase=\"'YOUTUBE'\">\n        <div class='salb-widget'>\n          <div class='salb-widget__box'>\n            <a href=\"widget-youtube.html\"><span class='glyphicon glyphicon-cog salb-glyphicon salb-blue'></span></a>\n            <span class='glyphicon glyphicon-align-justify salb-glyphicon'></span>\n          </div>\n          <iframe width=\"100%\" height=\"480\" src=\"https://www.youtube.com/embed/hu1JVTvzzxM\" frameborder=\"0\" allowfullscreen></iframe>\n        </div>\n      </div>\n\n      <div *ngSwitchCase=\"'IMAGE'\">\n        <div class='salb-widget'>\n          <div class='salb-widget__box'>\n            <a href=\"widget-image.html\"><span class='glyphicon glyphicon-cog salb-glyphicon salb-blue'></span></a>\n            <span class='glyphicon glyphicon-align-justify salb-glyphicon'></span>\n          </div>\n          <img src='http://lorempixel.com/400/200/'>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <footer class='salb-bg-grey navbar-fixed-bottom'>\n    <div class='container'>\n      <a [routerLink]=\"['/user', userId]\"><span class='glyphicon glyphicon-user salb-blue pull-right salb-glyphicon'></span></a>\n    </div>\n  </footer>\n\n"
+module.exports = "<header class='salb-bg-grey'>\n  <div class='container'>\n    <div class='row'>\n      <div class='col-xs-1'>\n        <a [routerLink]=\"['/user', userId, 'website', websiteId, 'page']\"><span class='glyphicon glyphicon-menu-left salb-glyphicon salb-dark'></span></a>\n      </div>\n      <div class='col-xs-5'>\n        <h1>Widgets</h1>\n      </div>\n      <div class='col-xs-6'>\n        <a [routerLink]=\"['/user', userId, 'website', websiteId, 'page', pageId, 'widget', 'new']\"><span class='glyphicon glyphicon-plus pull-right salb-glyphicon salb-dark'></span></a>\n      </div>\n    </div>\n  </div>\n</header>\n\n<div class='container'>\n  <div *ngFor=\"let widget of widgets\">\n\n    <div [ngSwitch]=\"widget.widgetType\">\n\n      <div *ngSwitchCase=\"'HEADING'\">\n        <div class='salb-widget'>\n          <div class='salb-widget__box'>\n            <a [routerLink]=\"['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget._id]\"><span class='glyphicon glyphicon-cog salb-glyphicon salb-blue'></span></a>\n            <span class='glyphicon glyphicon-align-justify salb-glyphicon'></span>\n          </div>\n          <div [ngSwitch]=\"widget.size\">\n            <h1 *ngSwitchCase=1>{{widget.text}}</h1>\n            <h2 *ngSwitchCase=2>{{widget.text}}</h2>\n            <h3 *ngSwitchCase=3>{{widget.text}}</h3>\n            <h4 *ngSwitchCase=4>{{widget.text}}</h4>\n            <h5 *ngSwitchCase=5>{{widget.text}}</h5>\n            <h6 *ngSwitchCase=6>{{widget.text}}</h6>\n          </div>\n        </div>\n      </div>\n\n      <div *ngSwitchCase=\"'YOUTUBE'\">\n        <div class='salb-widget'>\n          <div class='salb-widget__box'>\n            <a [routerLink]=\"['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget._id]\"><span class='glyphicon glyphicon-cog salb-glyphicon salb-blue'></span></a>\n            <span class='glyphicon glyphicon-align-justify salb-glyphicon'></span>\n          </div>\n          <iframe width=\"100%\" height=\"480\" src=\"https://www.youtube.com/embed/hu1JVTvzzxM\" frameborder=\"0\" allowfullscreen></iframe>\n        </div>\n      </div>\n\n      <div *ngSwitchCase=\"'IMAGE'\">\n        <div class='salb-widget'>\n          <div class='salb-widget__box'>\n            <a [routerLink]=\"['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget._id]\"><span class='glyphicon glyphicon-cog salb-glyphicon salb-blue'></span></a>\n            <span class='glyphicon glyphicon-align-justify salb-glyphicon'></span>\n          </div>\n          <img class=\"zlr-content\" src={{widget.url}} width=\"{{widget.width}}\"/>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <footer class='salb-bg-grey navbar-fixed-bottom'>\n    <div class='container'>\n      <a [routerLink]=\"['/user', userId]\"><span class='glyphicon glyphicon-user salb-blue pull-right salb-glyphicon'></span></a>\n    </div>\n  </footer>\n\n"
 
 /***/ }),
 

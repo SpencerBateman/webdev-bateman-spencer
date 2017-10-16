@@ -20,20 +20,17 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
 
-    this.activatedRoute.params
-      .subscribe((params: any) => {
+    this.activatedRoute.params.subscribe((params: any) => {
       this.userId = params['userId'];
+      this.user = this.userService.findUserById(this.userId);
+      this.username = this.user['username'];
+      this.firstName = this.user['firstName'];
+      this.lastName = this.user['lastName'];
     });
-
-    this.user = this.userService.findUserById(this.userId);
-    this.username = this.user['username'];
-    this.firstName = this.user['firstName'];
-    this.lastName = this.user['lastName'];
   }
 
   updateProfile() {
     this.userService.updateUser(this.userId, this.user);
-    console.log('update');
     this.router.navigate(['/user', this.userId]);
   }
 }

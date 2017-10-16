@@ -2,7 +2,7 @@
   <div class='container'>
     <div class='row'>
       <div class="col-xs-2">
-        <a href="widget-list.html"><span class='glyphicon glyphicon-menu-left salb-glyphicon salb-dark'></span></a>
+        <a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget']"><span class='glyphicon glyphicon-menu-left salb-glyphicon salb-dark'></span></a>
       </div>
       <div class='col-xs-10'>
         <h1>Choose Widget</h1>
@@ -67,7 +67,7 @@
 
 <footer class='salb-bg-grey navbar-fixed-bottom'>
   <div class='container'>
-    <a href="../user/profile.html"><span class='glyphicon glyphicon-user salb-blue pull-right salb-glyphicon'></span></a>
+    <a [routerLink]="['/user', userId]"><span class='glyphicon glyphicon-user salb-blue pull-right salb-glyphicon'></span></a>
   </div>
 </footer>
 
