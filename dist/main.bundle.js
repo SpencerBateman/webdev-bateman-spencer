@@ -1309,6 +1309,8 @@ module.exports = "<!-- This is the God container -->\n<div class='container'>\n 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WidgetHeaderComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_widget_service_client__ = __webpack_require__("../../../../../src/app/services/widget.service.client.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1319,10 +1321,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
 var WidgetHeaderComponent = (function () {
-    function WidgetHeaderComponent() {
+    function WidgetHeaderComponent(widgetService, router, activatedRoute) {
+        this.widgetService = widgetService;
+        this.router = router;
+        this.activatedRoute = activatedRoute;
     }
     WidgetHeaderComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.activatedRoute.params.subscribe(function (params) {
+            _this.userId = params['userId'];
+            _this.websiteId = params['wid'];
+            _this.pageId = params['pid'];
+            _this.widgetId = params['wgid'];
+        });
+        this.widget = this.widgetService.findWidgetById(this.widgetId);
+        this.widgetName = this.widget.name;
+        this.widgetText = this.widget.text;
+        this.widgetSize = this.widget.size;
+    };
+    WidgetHeaderComponent.prototype.updateWidget = function () {
+        this.widget.name = this.widgetName;
+        this.widget.text = this.widgetText;
+        this.widget.size = this.widgetSize;
+        this.widgetService.updateWidget(this.widgetId, this.widget);
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
     };
     return WidgetHeaderComponent;
 }());
@@ -1332,9 +1358,10 @@ WidgetHeaderComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/widget/widget-edit/widget-header/widget-header.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/widget/widget-edit/widget-header/widget-header.component.css")]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_widget_service_client__["a" /* WidgetService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_widget_service_client__["a" /* WidgetService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object])
 ], WidgetHeaderComponent);
 
+var _a, _b, _c;
 //# sourceMappingURL=widget-header.component.js.map
 
 /***/ }),
