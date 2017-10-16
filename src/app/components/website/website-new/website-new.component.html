@@ -2,7 +2,7 @@
   <div class='container'>
     <div class='row'>
       <div class='col-xs-2 col-sm-1'>
-        <a href="website-list.html"><span class='glyphicon glyphicon-menu-left salb-glyphicon'></span></a>
+        <a [routerLink]="['/user', userId, 'website']"><span class='glyphicon glyphicon-menu-left salb-glyphicon'></span></a>
       </div>
       <div class='col-sm-3 hidden-xs'>
         <h1>Websites</h1>
@@ -11,7 +11,7 @@
         <h1>New Website</h1>
       </div>
       <div class='col-xs-2 col-sm-1'>
-        <a href="website-list.html"><span class='glyphicon glyphicon-ok pull-right salb-glyphicon'></span></a>
+        <span (click)='createWebsite()' class='glyphicon glyphicon-ok pull-right salb-glyphicon'></span>
       </div>
     </div>
   </div>
@@ -32,12 +32,9 @@
     </div>
     <div class='col-sm-8 col-xs-12'>
       <h6>Name</h6>
-      <form (ngSubmit) = "createWebsite()" #f="ngForm">
       <input name="websiteName" [(ngModel)]="websiteName" type='text' class='form-control' placeholder='Name'>
       <h6>Description</h6>
       <textarea name="websiteDescription" [(ngModel)]="websiteDescription" type='text' rows="4" class='form-control' placeholder='Description'></textarea>
-        <button type='submit' class='btn btn-primary btn-block'>Create</button>
-    </form>
     </div>
   </div>
 </div>

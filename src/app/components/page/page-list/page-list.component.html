@@ -2,7 +2,7 @@
   <div class='container'>
     <div class='row'>
       <div class="col-xs-1">
-        <a href="../website/website-list.html"><span class='glyphicon glyphicon-menu-left pull-right salb-glyphicon salb-dark'></span></a>
+        <a [routerLink]="['/user', userId, 'website']"><span class='glyphicon glyphicon-menu-left pull-right salb-glyphicon salb-dark'></span></a>
       </div>
       <div class='col-xs-5'>
         <h1>Pages</h1>
@@ -17,7 +17,7 @@
 <div class='container'>
   <div class='row salb-padder' *ngFor="let page of pages">
     <div class='col-xs-8'>
-      <a [routerLink]="[]">{{ page.name }}</a>
+      <a [routerLink]="[page._id, 'widget']">{{ page.name }}</a>
     </div>
     <div class='col-xs-4'>
       <a [routerLink]="[page._id]"><span class='glyphicon glyphicon-cog pull-right salb-blue'></span></a>
@@ -27,7 +27,7 @@
 
 <footer class='salb-bg-grey navbar-fixed-bottom'>
   <div class='container'>
-    <a href="../user/profile.html"><span class='glyphicon glyphicon-user salb-blue pull-right salb-glyphicon'></span></a>
+    <a [routerLink]="['/user', userId]"><span class='glyphicon glyphicon-user salb-blue pull-right salb-glyphicon'></span></a>
   </div>
 </footer>
 

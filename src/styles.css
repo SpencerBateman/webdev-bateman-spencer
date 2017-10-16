@@ -7,3 +7,51 @@
 .salb-white {
   color: white;
 }
+
+
+.salb-glyphicon {
+  font-size: 30px;
+  margin: 15px 0;
+}
+
+.salb-padder {
+  margin: 20px 0;
+}
+
+.salb-blue {
+  color: #377BB5;
+}
+
+.salb-bg-grey {
+  background: #F8F8F8;
+}
+
+.salb-widget {
+  display: block;
+  position: relative;
+}
+
+.salb-widget img {
+  width: 100%;
+}
+
+.salb-widget__box {
+  width: 30px;
+  background: white;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  position: absolute;
+}
+
+.salb-widget__box span {
+  font-size: 10px;
+}
+
+a span {
+  color: white;
+}
+
+.salb-dark {
+  color: #333333;
+}

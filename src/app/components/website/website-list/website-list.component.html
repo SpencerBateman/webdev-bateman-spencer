@@ -2,7 +2,7 @@
   <div class='container'>
     <div class='row'>
       <div class='col-xs-1'>
-        <a href="../user/profile.html"><span class='glyphicon glyphicon-menu-left salb-glyphicon'></span></a>
+        <a [routerLink]="['/user', userId]"><span class='glyphicon glyphicon-menu-left salb-glyphicon'></span></a>
       </div>
       <div class='col-xs-8'>
         <h1>Websites</h1>
@@ -27,7 +27,8 @@
 
 <footer class='bg-primary navbar-fixed-bottom'>
   <div class='container'>
-    <a href="../user/profile.html"><span class='glyphicon glyphicon-user pull-right salb-glyphicon'></span></a>
+    <a [routerLink]="['/user', userId]"><span class='glyphicon glyphicon-user pull-right salb-glyphicon'></span>
+      </a>
   </div>
 </footer>
 
