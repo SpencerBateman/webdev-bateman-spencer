@@ -35,7 +35,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".salb-vcenter {\n  display: inline-block;\n  vertical-align: middle;\n  float: none;\n}\n\n.salb-white {\n  color: white;\n}\n", ""]);
+exports.push([module.i, ".salb-vcenter {\n  display: inline-block;\n  vertical-align: middle;\n  float: none;\n}\n\n.salb-white {\n  color: white;\n}\n\n\n.salb-glyphicon {\n  font-size: 30px;\n  margin: 15px 0;\n}\n\n.salb-padder {\n  margin: 20px 0;\n}\n\n.salb-blue {\n  color: #377BB5;\n}\n\n.salb-bg-grey {\n  background: #F8F8F8;\n}\n\n.salb-widget {\n  display: block;\n  position: relative;\n}\n\n.salb-widget img {\n  width: 100%;\n}\n\n.salb-widget__box {\n  width: 30px;\n  background: white;\n  top: 0;\n  right: 0;\n  z-index: 10;\n  position: absolute;\n}\n\n.salb-widget__box span {\n  font-size: 10px;\n}\n\na span {\n  color: white;\n}\n\n.salb-dark {\n  color: #333333;\n}\n", ""]);
 
 // exports
 
