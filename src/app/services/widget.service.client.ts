@@ -34,11 +34,13 @@ export class WidgetService {
 
   // retrieves the widgets in local widgets array whose pageId matches the parameter pageId
   findWidgetsByPageId(pageId: string) {
+    const list_widgets = [];
     for (let i = 0; i < this.widgets.length; i++ ) {
       if (this.widgets[i].pageId === pageId) {
-        return this.widgets[i];
+        list_widgets.push(this.widgets[i]);
       }
     }
+    return list_widgets;
   }
 
   // retrieves the widget in local widgets array whose _id matches the widgetId parameter
