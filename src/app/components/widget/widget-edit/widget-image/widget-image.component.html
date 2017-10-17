@@ -1,15 +1,13 @@
-<!-- This is the God container -->
 <div class='container'>
   <h6>Name</h6>
-  <input type='text' class='form-control' placeholder='Name'>
+  <input [(ngModel)]='widgetName' name='widgetName' type='text' class='form-control' placeholder='Name'>
   <h6>Text</h6>
-  <input type='text' class='form-control' placeholder='Text goes here'>
+  <input [(ngModel)]='widgetText' name='widgetText' type='text' class='form-control' placeholder='Text goes here'>
   <h6>Url</h6>
-  <input type='text' class='form-control' placeholder='paste your url'>
+  <input [(ngModel)]='widgetUrl' name='widgetUrl' type='text' class='form-control' placeholder='paste your url'>
   <h6>Width</h6>
-  <input type='text' class='form-control' placeholder='100%'>
+  <input [(ngModel)]='widgetWidth' name='widgetWidth' type='text' class='form-control' placeholder='100%'>
   <h6>Upload</h6>
   <input type="file" name="pic" accept="image/*">
   <button type='button' class='btn btn-primary btn-block'>Upload Image</button>
-  <a href="widget-list.html"><button type='button' class='btn btn-danger btn-block'>Delete</button></a>
 </div>

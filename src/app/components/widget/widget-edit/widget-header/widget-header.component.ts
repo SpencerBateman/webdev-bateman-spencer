@@ -38,8 +38,6 @@ export class WidgetHeaderComponent implements OnInit {
     this.widget.name = this.widgetName;
     this.widget.text = this.widgetText;
     this.widget.size = this.widgetSize;
-    console.log('test');
-    console.log(this.widget.size);
     this.widgetService.updateWidget(this.widgetId, this.widget);
     this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget'])
   }

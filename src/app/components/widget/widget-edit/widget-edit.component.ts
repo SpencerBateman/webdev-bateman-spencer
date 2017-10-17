@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { WidgetService } from '../../../services/widget.service.client';
 import { WidgetHeaderComponent } from './widget-header/widget-header.component';
+import { WidgetImageComponent } from './widget-image/widget-image.component';
+import { WidgetYoutubeComponent } from './widget-youtube/widget-youtube.component';
 
 @Component({
   selector: 'app-widget-edit',
@@ -14,6 +16,12 @@ export class WidgetEditComponent implements OnInit {
 
   @ViewChild(WidgetHeaderComponent)
   private headerComponent: WidgetHeaderComponent;
+
+  @ViewChild(WidgetImageComponent)
+  private widgetImageComponent: WidgetImageComponent;
+
+  @ViewChild(WidgetYoutubeComponent)
+  private widgetYoutubeComponent: WidgetYoutubeComponent;
 
   userId: string;
   websiteId: string;
@@ -35,10 +43,16 @@ export class WidgetEditComponent implements OnInit {
 
   }
 
+  deleteMe() {
+    this.widgetService.deleteWidget(this.widgetId);
+    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+  }
+
   updateWidget() {
-    console.log('checked');
     switch(this.widget.widgetType) {
         case 'HEADING': this.headerComponent.updateWidget(); break;
+        case 'IMAGE': this.widgetImageComponent.updateWidget(); break;
+        case 'YOUTUBE': this.widgetYoutubeComponent.updateWidget(); break;
     }
   }
 }

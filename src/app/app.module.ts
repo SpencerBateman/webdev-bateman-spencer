@@ -59,7 +59,7 @@ import { WidgetService } from './services/widget.service.client';
     Routing
   ],
   // Client Side services here
-  providers: [ UserService, WebsiteService, PageService, WidgetService],
+  providers: [ UserService, WebsiteService, PageService, WidgetService, TestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -25,8 +25,11 @@
   <div *ngSwitchCase="'YOUTUBE'">
     <app-widget-youtube></app-widget-youtube>
   </div>
-
+  <div class='container'>
+    <a (click)="deleteMe()"><button type='button' class='btn btn-danger btn-block'>Delete</button></a>
+  </div>
 </div>
+
 <footer class='salb-bg-grey navbar-fixed-bottom'>
   <div class='container'>
     <a [routerLink]="['/user', userId]"><span class='glyphicon glyphicon-user salb-blue pull-right salb-glyphicon'></span></a>
