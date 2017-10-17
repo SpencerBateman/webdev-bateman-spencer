@@ -8,10 +8,10 @@
 
   <form (ngSubmit) = "login()" #f="ngForm">
 
-    <input name='username' type='text' placeholder='username' class='form-control' [(ngModel)]="username"/>
-    <input name='password' type='password' placeholder='password' class='form-control' [(ngModel)]="password"/>
+    <input name='username' type='text' placeholder='username' class='form-control' required [(ngModel)]="username"/>
+    <input name='password' type='password' placeholder='password' class='form-control' required [(ngModel)]="password"/>
 
-    <button type='submit' class='btn btn-primary btn-block'>Login</button>
+    <button type='submit' [disabled]="!f.valid" class='btn btn-primary btn-block'>Login</button>
   </form>
   <a [routerLink]="['/register']">
     <button type='button' class='btn btn-success btn-block'>Register</button>

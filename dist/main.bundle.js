@@ -652,7 +652,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/user/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div *ngIf=\"errorFlag\"\n    class=\"alert alert-danger\">\n    {{errorMsg}}\n  </div>\n\n  <h1>Login</h1>\n\n  <form (ngSubmit) = \"login()\" #f=\"ngForm\">\n\n    <input name='username' type='text' placeholder='username' class='form-control' [(ngModel)]=\"username\"/>\n    <input name='password' type='password' placeholder='password' class='form-control' [(ngModel)]=\"password\"/>\n\n    <button type='submit' class='btn btn-primary btn-block'>Login</button>\n  </form>\n  <a [routerLink]=\"['/register']\">\n    <button type='button' class='btn btn-success btn-block'>Register</button>\n  </a>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div *ngIf=\"errorFlag\"\n    class=\"alert alert-danger\">\n    {{errorMsg}}\n  </div>\n\n  <h1>Login</h1>\n\n  <form (ngSubmit) = \"login()\" #f=\"ngForm\">\n\n    <input name='username' type='text' placeholder='username' class='form-control' required [(ngModel)]=\"username\"/>\n    <input name='password' type='password' placeholder='password' class='form-control' required [(ngModel)]=\"password\"/>\n\n    <button type='submit' [disabled]=\"!f.valid\" class='btn btn-primary btn-block'>Login</button>\n  </form>\n  <a [routerLink]=\"['/register']\">\n    <button type='button' class='btn btn-success btn-block'>Register</button>\n  </a>\n</div>\n"
 
 /***/ }),
 
