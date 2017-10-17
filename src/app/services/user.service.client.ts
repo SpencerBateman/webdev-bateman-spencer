@@ -24,7 +24,7 @@ export class UserService {
 
   // adds the user parameter instance to the local users array
   createUser(user: any) {
-    user._id = Math.random();
+    user._id = Math.floor(Math.random() * 1000 + 1).toString();
     this.users.push(user);
     return user;
   }

@@ -34,7 +34,7 @@ export class WebsiteEditComponent implements OnInit {
     this.website.name = this.websiteName;
     this.website.description = this.websiteDescription;
     this.websiteService.updateWebsite(this.websiteId, this.website);
-    this.router.navigate(['./user', this.userId, 'website', this.websiteId]);
+    this.router.navigate(['./user', this.userId, 'website']);
   }
 
   deleteWebsite() {

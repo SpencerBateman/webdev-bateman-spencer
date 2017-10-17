@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { WidgetService } from '../../../services/widget.service.client';
@@ -12,13 +12,14 @@ import { WidgetHeaderComponent } from './widget-header/widget-header.component';
 
 export class WidgetEditComponent implements OnInit {
 
+  @ViewChild(WidgetHeaderComponent)
+  private headerComponent: WidgetHeaderComponent;
+
   userId: string;
   websiteId: string;
   pageId: string;
   widgetId: string;
   widget: any;
-  widgetName: string;
-  widgetText: string;
   widgetSize: number;
 
   constructor(private widgetService: WidgetService, private router: Router, private activatedRoute: ActivatedRoute) { }
@@ -29,19 +30,15 @@ export class WidgetEditComponent implements OnInit {
       this.websiteId = params['wid'];
       this.pageId = params['pid'];
       this.widgetId = params['wgid'];
+      this.widget = this.widgetService.findWidgetById(this.widgetId);
     });
 
-    this.widget = this.widgetService.findWidgetById(this.widgetId);
-    this.widgetName = this.widget.name;
-    this.widgetText = this.widget.text;
-    this.widgetSize = this.widget.size;
   }
 
   updateWidget() {
-    this.widget.name = this.widgetName;
-    this.widget.text = this.widgetText;
-    this.widget.size = this.widgetSize;
-    this.widgetService.updateWidget(this.widgetId, this.widget);
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget'])
+    console.log('checked');
+    switch(this.widget.widgetType) {
+        case 'HEADING': this.headerComponent.updateWidget(); break;
+    }
   }
 }

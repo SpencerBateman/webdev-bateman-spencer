@@ -19,7 +19,7 @@ export class PageService {
   //adds the page parameter instance to the local pages array.
   //The new page's websiteId is set to the websiteId parameter
   createPage(websiteId: string, page: any) {
-    page._id = Math.random();
+    page._id = Math.floor(Math.random() * 1000 + 1).toString();
     page.websiteId = websiteId;
     this.pages.push(page);
     return page;

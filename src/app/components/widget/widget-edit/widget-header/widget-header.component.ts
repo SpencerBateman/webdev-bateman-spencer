@@ -27,18 +27,19 @@ export class WidgetHeaderComponent implements OnInit {
       this.websiteId = params['wid'];
       this.pageId = params['pid'];
       this.widgetId = params['wgid'];
+      this.widget = this.widgetService.findWidgetById(this.widgetId);
+      this.widgetName = this.widget.name;
+      this.widgetText = this.widget.text;
+      this.widgetSize = this.widget.size;
     });
-
-    this.widget = this.widgetService.findWidgetById(this.widgetId);
-    this.widgetName = this.widget.name;
-    this.widgetText = this.widget.text;
-    this.widgetSize = this.widget.size;
   }
 
   updateWidget() {
     this.widget.name = this.widgetName;
     this.widget.text = this.widgetText;
     this.widget.size = this.widgetSize;
+    console.log('test');
+    console.log(this.widget.size);
     this.widgetService.updateWidget(this.widgetId, this.widget);
     this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget'])
   }

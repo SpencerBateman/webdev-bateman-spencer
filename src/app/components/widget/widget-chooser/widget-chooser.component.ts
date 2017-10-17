@@ -14,7 +14,7 @@ export class WidgetChooserComponent implements OnInit {
   websiteId: string;
   pageId: string;
 
-  constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute) { }
+  constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: any) => {
@@ -24,4 +24,9 @@ export class WidgetChooserComponent implements OnInit {
     });
   }
 
+  createWidget(type: string) {
+    const new_widget = {widgetType: type, pageId: this.pageId}
+    const new_new_widget = this.widgetService.createWidget(this.pageId, new_widget);
+    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', new_new_widget._id]);
+  }
 }

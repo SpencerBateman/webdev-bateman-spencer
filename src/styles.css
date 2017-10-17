@@ -55,3 +55,15 @@ a span {
 .salb-dark {
   color: #333333;
 }
+
+button {
+  margin: 10px 0;
+}
+
+input {
+  margin: 10px 0;
+}
+
+.salb-clickable:hover {
+  cursor: pointer;
+}
