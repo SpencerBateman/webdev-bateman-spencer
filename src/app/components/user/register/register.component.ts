@@ -23,8 +23,8 @@ export class RegisterComponent implements OnInit {
   register() {
     if (this.password === this.conf_password) {
       const user = {_id: 0, username: this.username, password: this.password, firstName: this.firstName, lastName: this.lastName}
-      this.userService.createUser(user);
-      this.router.navigate(['/login']);
+      const new_user = this.userService.createUser(user);
+      this.router.navigate(['/user', new_user._id]);
     }
   }
 

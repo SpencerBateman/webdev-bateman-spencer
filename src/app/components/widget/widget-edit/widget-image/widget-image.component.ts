@@ -34,12 +34,14 @@ export class WidgetImageComponent implements OnInit {
   }
 
   updateWidget() {
-    this.widget.name = this.widgetName;
-    this.widget.text = this.widgetText;
-    this.widget.width = this.widgetWidth;
-    this.widget.url = this.widgetUrl;
-    this.widgetService.updateWidget(this.widgetId, this.widget);
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+    if (this.widgetName != null && this.widgetText != null && this.widgetWidth != null) {
+      this.widget.name = this.widgetName;
+      this.widget.text = this.widgetText;
+      this.widget.width = this.widgetWidth;
+      this.widget.url = this.widgetUrl;
+      this.widgetService.updateWidget(this.widgetId, this.widget);
+      this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+    }
   }
 
 }

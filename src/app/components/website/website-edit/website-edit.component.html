@@ -17,8 +17,7 @@
   </div>
 </header>
 
-<!-- This is the God container -->
-<div class='container'>
+<div class='container big-boy'>
   <div class='row'>
     <div class='col-sm-4 hidden-xs'>
       <div class='row salb-padder' *ngFor="let website of websites">
@@ -33,11 +32,11 @@
 
     <div class='col-sm-8 col-xs-12'>
       <h6>Name</h6>
-        <input name="websiteName" [(ngModel)]="websiteName" type='text' class='form-control' placeholder='Name'>
-        <h6>Description</h6>
-        <textarea name="websiteDescription" [(ngModel)]="websiteDescription" type='text' rows="4" class='form-control' placeholder='Description'></textarea>
+      <input name="websiteName" [(ngModel)]="websiteName" type='text' class='form-control' placeholder='Name'>
+      <h6>Description</h6>
+      <textarea name="websiteDescription" [(ngModel)]="websiteDescription" type='text' rows="4" class='form-control' placeholder='Description'></textarea>
 
-        <button (click)="deleteWebsite()" type='button' class='btn btn-danger btn-block'>Delete</button>
+      <button (click)="deleteWebsite()" type='button' class='btn btn-danger btn-block'>Delete</button>
     </div>
   </div>
 </div>
@@ -45,6 +44,6 @@
 <footer class='bg-primary navbar-fixed-bottom'>
   <div class='container'>
     <a [routerLink]="['/user', userId]"><span class='glyphicon glyphicon-user pull-right salb-glyphicon'></span>
-      </a>
+    </a>
   </div>
 </footer>

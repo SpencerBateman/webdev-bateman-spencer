@@ -14,7 +14,7 @@
   </div>
 </header>
 
-<div class='container'>
+<div class='container big-boy'>
   <div *ngFor="let widget of widgets">
 
     <div [ngSwitch]="widget.widgetType">
@@ -42,7 +42,7 @@
             <a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget._id]"><span class='glyphicon glyphicon-cog salb-glyphicon salb-blue'></span></a>
             <span class='glyphicon glyphicon-align-justify salb-glyphicon'></span>
           </div>
-          <iframe width="100%" height="480" src="https://www.youtube.com/embed/hu1JVTvzzxM" frameborder="0" allowfullscreen></iframe>
+          <iframe width="100%" [style.width]="widget.width" height="480" src="https://www.youtube.com/embed/hu1JVTvzzxM" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
 
@@ -52,7 +52,7 @@
             <a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget._id]"><span class='glyphicon glyphicon-cog salb-glyphicon salb-blue'></span></a>
             <span class='glyphicon glyphicon-align-justify salb-glyphicon'></span>
           </div>
-          <img class="zlr-content" src={{widget.url}} width="{{widget.width}}"/>
+          <img class="zlr-content" src={{widget.url}} [style.width]="widget.width"/>
         </div>
       </div>
     </div>

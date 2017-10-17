@@ -35,10 +35,12 @@ export class WidgetHeaderComponent implements OnInit {
   }
 
   updateWidget() {
-    this.widget.name = this.widgetName;
-    this.widget.text = this.widgetText;
-    this.widget.size = this.widgetSize;
-    this.widgetService.updateWidget(this.widgetId, this.widget);
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget'])
+    if (this.widgetName != null && this.widgetText != null && this.widgetSize != null && this.widgetSize > 0 && this.widgetSize < 7) {
+      this.widget.name = this.widgetName;
+      this.widget.text = this.widgetText;
+      this.widget.size = this.widgetSize;
+      this.widgetService.updateWidget(this.widgetId, this.widget);
+      this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget'])
+    }
   }
 }

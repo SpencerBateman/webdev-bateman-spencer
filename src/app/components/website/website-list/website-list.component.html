@@ -14,7 +14,7 @@
   </div>
 </header>
 
-<div class='container'>
+<div class='container big-boy'>
   <div class='row salb-padder' *ngFor="let website of websites">
     <div class='col-xs-8'>
       <a [routerLink]="['/user', userId, 'website', website._id, 'page']" >{{ website.name }}</a>

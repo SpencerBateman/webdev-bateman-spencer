@@ -22,13 +22,15 @@ export class LoginComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
+    this.errorFlag = false;
   }
 
   login(): void {
-    console.log(this.username + ' test');
     const user = this.userService.findUserByUsername(this.username);
-    if (this.username === user.username && this.password === user.password) {
+    if (user != null && this.username === user.username && this.password === user.password) {
       this.router.navigate(['user/' + user._id]);
+    } else {
+      this.errorFlag = true;
     }
   }
 }

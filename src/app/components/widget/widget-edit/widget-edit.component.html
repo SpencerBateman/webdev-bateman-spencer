@@ -13,20 +13,22 @@
     </div>
   </div>
 </header>
-<div [ngSwitch]="widget.widgetType">
-  <div *ngSwitchCase="'HEADING'">
-    <app-widget-header></app-widget-header>
-  </div>
+<div class="container big-boy">
+  <div [ngSwitch]="widget.widgetType">
+    <div *ngSwitchCase="'HEADING'">
+      <app-widget-header></app-widget-header>
+    </div>
 
-  <div *ngSwitchCase="'IMAGE'">
-    <app-widget-image></app-widget-image>
-  </div>
+    <div *ngSwitchCase="'IMAGE'">
+      <app-widget-image></app-widget-image>
+    </div>
 
-  <div *ngSwitchCase="'YOUTUBE'">
-    <app-widget-youtube></app-widget-youtube>
-  </div>
-  <div class='container'>
-    <a (click)="deleteMe()"><button type='button' class='btn btn-danger btn-block'>Delete</button></a>
+    <div *ngSwitchCase="'YOUTUBE'">
+      <app-widget-youtube></app-widget-youtube>
+    </div>
+    <div class='container'>
+      <a (click)="deleteMe()"><button type='button' class='btn btn-danger btn-block'>Delete</button></a>
+    </div>
   </div>
 </div>
 

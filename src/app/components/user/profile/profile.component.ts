@@ -30,6 +30,9 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile() {
+    this.user.username = this.username;
+    this.user.firstName = this.firstName;
+    this.user.lastName = this.lastName;
     this.userService.updateUser(this.userId, this.user);
     this.router.navigate(['/user', this.userId]);
   }
