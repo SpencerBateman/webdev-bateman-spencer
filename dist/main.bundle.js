@@ -688,13 +688,15 @@ var LoginComponent = (function () {
         this.errorFlag = false;
     };
     LoginComponent.prototype.login = function () {
-        var user = this.userService.findUserByUsername(this.username);
-        if (user != null && this.username === user.username && this.password === user.password) {
-            this.router.navigate(['user/' + user._id]);
-        }
-        else {
-            this.errorFlag = true;
-        }
+        var _this = this;
+        var user = this.userService.findUserByCredentials(this.username, this.password).subscribe(function (user) {
+            if (user != null && _this.username === user.username && _this.password === user.password) {
+                _this.router.navigate(['user/' + user._id]);
+            }
+            else {
+                _this.errorFlag = true;
+            }
+        });
     };
     return LoginComponent;
 }());
@@ -772,10 +774,14 @@ var ProfileComponent = (function () {
         var _this = this;
         this.activatedRoute.params.subscribe(function (params) {
             _this.userId = params['userId'];
-            _this.user = _this.userService.findUserById(_this.userId);
-            _this.username = _this.user['username'];
-            _this.firstName = _this.user['firstName'];
-            _this.lastName = _this.user['lastName'];
+            //this.user = this.userService.findUserById(this.userId);
+            _this.userService.findUserById(_this.userId).subscribe(function (user) {
+                _this.user = user;
+                console.log(_this.user);
+                _this.username = _this.user['username'];
+                _this.firstName = _this.user['firstName'];
+                _this.lastName = _this.user['lastName'];
+            });
         });
     };
     ProfileComponent.prototype.updateProfile = function () {
@@ -854,10 +860,13 @@ var RegisterComponent = (function () {
     RegisterComponent.prototype.ngOnInit = function () {
     };
     RegisterComponent.prototype.register = function () {
+        var _this = this;
         if (this.password === this.conf_password) {
             var user = { _id: 0, username: this.username, password: this.password, firstName: this.firstName, lastName: this.lastName };
-            var new_user = this.userService.createUser(user);
-            this.router.navigate(['/user', new_user._id]);
+            this.userService.createUser(user).subscribe(function (user) {
+                //console.log(users);
+                _this.router.navigate(['/user', user._id]);
+            });
         }
     };
     return RegisterComponent;
@@ -1811,8 +1820,9 @@ var _a;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__ = __webpack_require__("../../../../rxjs/Rx.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__ = __webpack_require__("../../../../rxjs/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1824,9 +1834,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 // injecting the service into module
 var UserService = (function () {
-    function UserService() {
+    function UserService(http) {
+        this.http = http;
         this.users = [
             { _id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder" },
             { _id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley" },
@@ -1840,17 +1852,18 @@ var UserService = (function () {
     }
     // adds the user parameter instance to the local users array
     UserService.prototype.createUser = function (user) {
+        var url = 'http://localhost:3100/api/user';
         user._id = Math.floor(Math.random() * 1000 + 1).toString();
-        this.users.push(user);
-        return user;
+        return this.http.post(url, user).map(function (response) {
+            return response.json();
+        });
     };
     // returns the user in local users array whose _id matches the userId parameter
     UserService.prototype.findUserById = function (userId) {
-        for (var x = 0; x < this.users.length; x++) {
-            if (userId === this.users[x]._id) {
-                return this.users[x];
-            }
-        }
+        var url = 'http://localhost:3100/api/user/' + userId;
+        return this.http.get(url).map(function (response) {
+            return response.json();
+        });
     };
     // returns the user in local users array whose username matches the parameter username
     UserService.prototype.findUserByUsername = function (username) {
@@ -1862,11 +1875,10 @@ var UserService = (function () {
     };
     //returns the user whose username and password match the username and password parameters
     UserService.prototype.findUserByCredentials = function (username, password) {
-        for (var x = 0; x < this.users.length; x++) {
-            if (username === this.users[x].username && password === this.users[x].password) {
-                return this.users[x];
-            }
-        }
+        var url = 'http://localhost:3100/api/user?username=' + username + '&password=' + password;
+        return this.http.get(url).map(function (response) {
+            return response.json();
+        });
     };
     // updates the user in local users array whose _id matches the userId parameter
     UserService.prototype.updateUser = function (userId, user) {
@@ -1888,9 +1900,10 @@ var UserService = (function () {
 }());
 UserService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === "function" && _a || Object])
 ], UserService);
 
+var _a;
 //# sourceMappingURL=user.service.client.js.map
 
 /***/ }),

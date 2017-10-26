@@ -9,7 +9,7 @@ module.exports = function(app)
     app.delete("/api/test/:id", deleteMessage);
 
 
-  var connectionString = 'mongodb://webappmaker:webappmaker@ds163181.mlab.com:63181/webappmaker';
+  var connectionString = 'mongodb://127.0.0.1:27017/test';//mongodb://webappmaker:webappmaker@ds163181.mlab.com:63181/webappmaker';
   if(process.env.MLAB_USERNAME_WEBDEV) { // Check if running remotely
     var username = process.env.MLAB_USERNAME_WEBDEV;
     var password = process.env.MLAB_PASSWORD_WEBDEV;

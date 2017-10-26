@@ -22,10 +22,14 @@ export class ProfileComponent implements OnInit {
 
     this.activatedRoute.params.subscribe((params: any) => {
       this.userId = params['userId'];
-      this.user = this.userService.findUserById(this.userId);
-      this.username = this.user['username'];
-      this.firstName = this.user['firstName'];
-      this.lastName = this.user['lastName'];
+      //this.user = this.userService.findUserById(this.userId);
+      this.userService.findUserById(this.userId).subscribe((user: any) => {
+        this.user = user;
+        console.log(this.user);
+        this.username = this.user['username'];
+        this.firstName = this.user['firstName'];
+        this.lastName = this.user['lastName'];
+      });
     });
   }
 
