@@ -25,7 +25,6 @@ export class UserService {
   // adds the user parameter instance to the local users array
   createUser(user: any) {
     const url = 'http://localhost:3100/api/user';
-    user._id = Math.floor(Math.random() * 1000 + 1).toString();
     return this.http.post(url, user).map((response: Response) => {
       return response.json();
     });
@@ -33,8 +32,7 @@ export class UserService {
 
   // returns the user in local users array whose _id matches the userId parameter
   findUserById(userId: string) {
-    const  url = 'http://localhost:3100/api/user/' + userId;
-
+    const url = 'http://localhost:3100/api/user/' + userId;
     return this.http.get(url).map((response: Response) => {
       return response.json();
     });
@@ -61,11 +59,17 @@ export class UserService {
 
   // updates the user in local users array whose _id matches the userId parameter
   updateUser(userId: string, user: any) {
-    for (let x = 0; x < this.users.length; x ++) {
-      if (userId === this.users[x]._id) {
-        this.users[x] = user;
-      }
-    }
+    //for (let x = 0; x < this.users.length; x ++) {
+      //if (userId === this.users[x]._id) {
+        //this.users[x] = user;
+      //}
+    //}
+
+    const url = 'http://localhost:3100/api/user/' + userId;
+
+    return this.http.put(url, user).map((response: Response) => {
+      return response.json();
+    });
   }
 
   // removes the user whose _id matches the userId parameter

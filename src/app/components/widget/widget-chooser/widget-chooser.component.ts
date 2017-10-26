@@ -25,8 +25,13 @@ export class WidgetChooserComponent implements OnInit {
   }
 
   createWidget(type: string) {
-    const new_widget = {widgetType: type, pageId: this.pageId}
-    const new_new_widget = this.widgetService.createWidget(this.pageId, new_widget);
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', new_new_widget._id]);
+    const new_widget = {_id: "", widgetType: type, pageId: this.pageId}
+    //const new_new_widget = this.widgetService.createWidget(this.pageId, new_widget);
+    this.widgetService.createWidget(this.pageId, new_widget).subscribe((widget) => {
+      const new_new_widget = widget;
+      this.widgetService.createWidget(this.pageId, new_widget).subscribe((widget) => {
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', new_new_widget._id]);
+      });
+    });
   }
 }

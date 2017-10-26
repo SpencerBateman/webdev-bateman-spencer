@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Injectable()
 
 export class WidgetService {
-  constructor() { }
+  constructor(private http: Http) { }
 
   widgets = [
     { "_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO"},
@@ -26,49 +26,42 @@ export class WidgetService {
   // adds the widget parameter instance to the local widgets array.
   // The new widget's pageId is set to the pageId parameter
   createWidget(pageId: string, widget: any) {
-    widget._id = Math.floor(Math.random() * 1000 + 1).toString();
-    widget.pageId = pageId;
-    this.widgets.push(widget);
-    return widget;
+    const url = 'http://localhost:3100/api/page/' + pageId + '/widget';
+    return this.http.post(url, widget).map((response: Response) => {
+      return response.json();
+    });
   }
 
   // retrieves the widgets in local widgets array whose pageId matches the parameter pageId
   findWidgetsByPageId(pageId: string) {
-    const list_widgets = [];
-    for (let i = 0; i < this.widgets.length; i++ ) {
-      if (this.widgets[i].pageId === pageId) {
-        list_widgets.push(this.widgets[i]);
-      }
-    }
-    return list_widgets;
+    const url = 'http://localhost:3100/api/page/' + pageId + '/widget';
+    return this.http.get(url).map((response: Response) => {
+      return response.json();
+    });
   }
 
   // retrieves the widget in local widgets array whose _id matches the widgetId parameter
   findWidgetById(widgetId: string) {
-    for (let i = 0; i < this.widgets.length; i++ ) {
-      if (this.widgets[i]._id === widgetId) {
-        return this.widgets[i];
-      }
-    }
+    const url = 'http://localhost:3100/api/widget' + widgetId;
+    return this.http.get(url).map((response: Response) => {
+      return response.json();
+    });
   }
 
   // updates the widget in local widgets array whose _id matches the widgetId parameter
   updateWidget(widgetId: string, widget: any) {
-    for (let i = 0; i < this.widgets.length; i++ ) {
-      if (this.widgets[i]._id === widgetId) {
-        this.widgets[i] = widget;
-      }
-    }
-
+    const url = 'http://localhost:3100/api/widget' + widgetId;
+    return this.http.put(url, widget).map((response: Response) => {
+      return response.json();
+    });
   }
 
   // removes the widget from local widgets array whose _id matches the widgetId parameter
   deleteWidget(widgetId: string) {
-    for (let i = 0; i < this.widgets.length; i++ ) {
-      if (this.widgets[i]._id === widgetId) {
-        this.widgets.splice(i, 1);
-      }
-    }
+    const url = 'http://localhost:3100/api/widget' + widgetId;
+    return this.http.delete(url).map((response: Response) => {
+      return response.json();
+    });
   }
 
 }

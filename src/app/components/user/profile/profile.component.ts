@@ -22,7 +22,6 @@ export class ProfileComponent implements OnInit {
 
     this.activatedRoute.params.subscribe((params: any) => {
       this.userId = params['userId'];
-      //this.user = this.userService.findUserById(this.userId);
       this.userService.findUserById(this.userId).subscribe((user: any) => {
         this.user = user;
         console.log(this.user);
@@ -37,6 +36,9 @@ export class ProfileComponent implements OnInit {
     this.user.username = this.username;
     this.user.firstName = this.firstName;
     this.user.lastName = this.lastName;
+    this.userService.updateUser(this.userId, this.user).subscribe((users: any) => {
+      console.log(users);
+    });
     this.userService.updateUser(this.userId, this.user);
     this.router.navigate(['/user', this.userId]);
   }

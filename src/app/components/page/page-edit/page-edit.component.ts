@@ -24,24 +24,28 @@ export class PageEditComponent implements OnInit {
       this.userId = params['userId'];
       this.websiteId = params['wid'];
       this.pageId = params['pid']
-      this.page = this.pageService.findPageById(this.pageId);
-      this.pageName = this.page.name;
-      this.pageDescription = this.page.description;
+      console.log('here');
+      this.pageService.findPageById(this.pageId).subscribe((page: any) => {
+        console.log(page);
+        this.page = page;
+        this.pageName = this.page.name;
+        this.pageDescription = this.page.description;
+      });
     });
 
   }
 
   deletePage() {
-    this.pageService.deletePage(this.pageId);
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+    this.pageService.deletePage(this.pageId).subscribe((page: any) => {
+      this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+    });
   }
 
   updatePage() {
     this.page.name = this.pageName;
     this.page.description = this.pageDescription;
-    this.pageService.updatePage(this.pageId, this.page);
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+    this.pageService.updatePage(this.pageId, this.page).subscribe((page: any) => {
+      this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+    });
   }
-
-
 }

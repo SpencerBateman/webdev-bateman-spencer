@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Injectable()
 
 export class WebsiteService {
-  constructor() { }
+  constructor(private http: Http) { }
 
   websites = [
     { "_id": "123", "name": "Facebook",    "developerId": "456", "description": "Lorem" },
@@ -23,48 +23,42 @@ export class WebsiteService {
   // adds the website parameter instance to the local websites array.
   // The new website's developerId is set to the userId parameter
   createWebsite(userId: string, website: any) {
-    website._id = Math.floor(Math.random() * 1000 + 1).toString();
-    website.developerId = userId;
-    this.websites.push(website);
-    return website;
+    const url = 'http://localhost:3100/api/user/' + userId + '/website';
+    return this.http.post(url, website).map((response: Response) => {
+      return response.json();
+    });
   }
 
   // retrieves the websites in local websites array whose developerId matches the parameter userId
   findWebsiteByUser(userId: string) {
-    var websiteArray = [];
-    for (let i = 0; i < this.websites.length; i++ ) {
-      if (this.websites[i].developerId === userId) {
-        websiteArray.push(this.websites[i]);
-      }
-    }
-        return websiteArray;
+    const url = 'http://localhost:3100/api/user/' + userId + '/website';
+    return this.http.get(url).map((response: Response) => {
+      return response.json();
+    });
   }
 
   // retrieves the website in local websites array whose _id matches the websiteId parameter
   findWebsiteById(websiteId: string) {
-    for (let i = 0; i < this.websites.length; i++ ) {
-      if (this.websites[i]._id === websiteId) {
-        return this.websites[i];
-      }
-    }
+    const url = 'http://localhost:3100/api/website/' + websiteId;
+    return this.http.get(url).map((response: Response) => {
+      return response.json();
+    });
   }
 
   // updates the website in local websites array whose _id matches the websiteId parameter
   updateWebsite(websiteId: string, website: any) {
-    for (let i = 0; i < this.websites.length; i++ ) {
-      if (this.websites[i]._id === websiteId) {
-        this.websites[i] = website;
-      }
-    }
+    const url = 'http://localhost:3100/api/website/' + websiteId;
+    return this.http.put(url, website).map((response: Response) => {
+      return response.json();
+    });
   }
 
   // removes the website from local websites array whose _id matches the websiteId parameter
   deleteWebsite(websiteId: string) {
-    for (let i = 0; i < this.websites.length; i++ ) {
-      if (this.websites[i]._id === websiteId) {
-        this.websites.splice(i, 1);
-      }
-    }
+    const url = 'http://localhost:3100/api/website/' + websiteId;
 
+    return this.http.delete(url).map((response: Response) => {
+      return response.json();
+    });
   }
 }
