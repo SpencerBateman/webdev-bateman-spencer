@@ -59,7 +59,7 @@ module.exports = function(app) {
 
   function deleteWidget(req, res) {
     var widgetId = req.params['widgetId'];
-    for (let x = 0; x < widget.length; x ++) {
+    for (let x = 0; x < widgets.length; x ++) {
       if (widgetId === widgets[x]._id) {
         widgets.splice(x, 1);
       }

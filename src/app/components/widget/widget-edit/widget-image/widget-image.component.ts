@@ -28,8 +28,10 @@ export class WidgetImageComponent implements OnInit {
       this.websiteId = params['wid'];
       this.pageId = params['pid'];
       this.widgetId = params['wgid'];
-      this.widget = this.widgetService.findWidgetById(this.widgetId);
-      this.widgetName = this.widget.name;
+      this.widgetService.findWidgetById(this.widgetId).subscribe((widget: any) => {
+        this.widget = widget;
+        this.widgetName = this.widget.name;
+      });
     });
   }
 
@@ -39,8 +41,9 @@ export class WidgetImageComponent implements OnInit {
       this.widget.text = this.widgetText;
       this.widget.width = this.widgetWidth;
       this.widget.url = this.widgetUrl;
-      this.widgetService.updateWidget(this.widgetId, this.widget);
-      this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+      this.widgetService.updateWidget(this.widgetId, this.widget).subscribe((widget: any) => {
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+      });
     }
   }
 

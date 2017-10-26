@@ -42,7 +42,7 @@ export class WidgetService {
 
   // retrieves the widget in local widgets array whose _id matches the widgetId parameter
   findWidgetById(widgetId: string) {
-    const url = 'http://localhost:3100/api/widget' + widgetId;
+    const url = 'http://localhost:3100/api/widget/' + widgetId;
     return this.http.get(url).map((response: Response) => {
       return response.json();
     });
@@ -50,7 +50,7 @@ export class WidgetService {
 
   // updates the widget in local widgets array whose _id matches the widgetId parameter
   updateWidget(widgetId: string, widget: any) {
-    const url = 'http://localhost:3100/api/widget' + widgetId;
+    const url = 'http://localhost:3100/api/widget/' + widgetId;
     return this.http.put(url, widget).map((response: Response) => {
       return response.json();
     });
@@ -58,7 +58,7 @@ export class WidgetService {
 
   // removes the widget from local widgets array whose _id matches the widgetId parameter
   deleteWidget(widgetId: string) {
-    const url = 'http://localhost:3100/api/widget' + widgetId;
+    const url = 'http://localhost:3100/api/widget/' + widgetId;
     return this.http.delete(url).map((response: Response) => {
       return response.json();
     });

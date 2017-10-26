@@ -44,15 +44,16 @@ export class WidgetEditComponent implements OnInit {
   }
 
   deleteMe() {
-    this.widgetService.deleteWidget(this.widgetId);
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+    this.widgetService.deleteWidget(this.widgetId).subscribe(() => {
+      this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+    });
   }
 
   updateWidget() {
     switch(this.widget.widgetType) {
-        case 'HEADING': this.headerComponent.updateWidget(); break;
-        case 'IMAGE': this.widgetImageComponent.updateWidget(); break;
-        case 'YOUTUBE': this.widgetYoutubeComponent.updateWidget(); break;
+      case 'HEADING': this.headerComponent.updateWidget(); break;
+      case 'IMAGE': this.widgetImageComponent.updateWidget(); break;
+      case 'YOUTUBE': this.widgetYoutubeComponent.updateWidget(); break;
     }
   }
 }

@@ -27,10 +27,12 @@ export class WidgetHeaderComponent implements OnInit {
       this.websiteId = params['wid'];
       this.pageId = params['pid'];
       this.widgetId = params['wgid'];
-      this.widget = this.widgetService.findWidgetById(this.widgetId);
-      this.widgetName = this.widget.name;
-      this.widgetText = this.widget.text;
-      this.widgetSize = this.widget.size;
+      this.widgetService.findWidgetById(this.widgetId).subscribe((widget: any) => {
+        this.widget = widget;
+        this.widgetName = widget.name;
+        this.widgetText = widget.text;
+        this.widgetSize = widget.size;
+      });
     });
   }
 
@@ -39,8 +41,9 @@ export class WidgetHeaderComponent implements OnInit {
       this.widget.name = this.widgetName;
       this.widget.text = this.widgetText;
       this.widget.size = this.widgetSize;
-      this.widgetService.updateWidget(this.widgetId, this.widget);
-      this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget'])
+      this.widgetService.updateWidget(this.widgetId, this.widget).subscribe((widget: any) => {
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget'])
+      });
     }
   }
 }
