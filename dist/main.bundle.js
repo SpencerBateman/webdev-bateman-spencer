@@ -1223,10 +1223,7 @@ var WidgetChooserComponent = (function () {
         var _this = this;
         var new_widget = { _id: "", widgetType: type, pageId: this.pageId };
         this.widgetService.createWidget(this.pageId, new_widget).subscribe(function (widget) {
-            var new_new_widget = widget;
-            _this.widgetService.createWidget(_this.pageId, new_widget).subscribe(function (widget) {
-                _this.router.navigate(['/user', _this.userId, 'website', _this.websiteId, 'page', _this.pageId, 'widget', new_new_widget._id]);
-            });
+            _this.router.navigate(['/user', _this.userId, 'website', _this.websiteId, 'page', _this.pageId, 'widget', widget._id]);
         });
     };
     return WidgetChooserComponent;
@@ -1310,7 +1307,10 @@ var WidgetEditComponent = (function () {
             _this.websiteId = params['wid'];
             _this.pageId = params['pid'];
             _this.widgetId = params['wgid'];
-            _this.widget = _this.widgetService.findWidgetById(_this.widgetId);
+            _this.widgetService.findWidgetById(_this.widgetId).subscribe(function (widget) {
+                _this.widget = widget;
+                console.log(widget);
+            });
         });
     };
     WidgetEditComponent.prototype.deleteMe = function () {
@@ -1381,7 +1381,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/widget/widget-edit/widget-header/widget-header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- This is the God container -->\n<div class='container big-boy'>\n  <h6>Name</h6>\n  <input [(ngModel)]=\"widgetName\" name=\"widgetName\" type='text' class='form-control' placeholder='Name'>\n  <h6>Text</h6>\n  <input [(ngModel)]=\"widgetText\" name=\"widgetText\" type='text' class='form-control' placeholder='Put your text here'>\n  <h6>Size</h6>\n  <input [(ngModel)]=\"widgetSize\" name=\"widgetSize\" type='number' class='form-control' placeholder='Size'>\n</div>\n"
+module.exports = "<!-- This is the God container -->\n<div class='container big-boy'>\n  <h6>Text</h6>\n  <input [(ngModel)]=\"widgetText\" name=\"widgetText\" type='text' class='form-control' placeholder='Put your text here'>\n  <h6>Size</h6>\n  <input [(ngModel)]=\"widgetSize\" name=\"widgetSize\" type='number' class='form-control' placeholder='Size'>\n</div>\n"
 
 /***/ }),
 
@@ -1421,7 +1421,6 @@ var WidgetHeaderComponent = (function () {
             _this.widgetId = params['wgid'];
             _this.widgetService.findWidgetById(_this.widgetId).subscribe(function (widget) {
                 _this.widget = widget;
-                _this.widgetName = widget.name;
                 _this.widgetText = widget.text;
                 _this.widgetSize = widget.size;
             });
@@ -1429,8 +1428,7 @@ var WidgetHeaderComponent = (function () {
     };
     WidgetHeaderComponent.prototype.updateWidget = function () {
         var _this = this;
-        if (this.widgetName != null && this.widgetText != null && this.widgetSize != null && this.widgetSize > 0 && this.widgetSize < 7) {
-            this.widget.name = this.widgetName;
+        if (this.widgetText != null && this.widgetSize != null && this.widgetSize > 0 && this.widgetSize < 7) {
             this.widget.text = this.widgetText;
             this.widget.size = this.widgetSize;
             this.widgetService.updateWidget(this.widgetId, this.widget).subscribe(function (widget) {
@@ -1475,7 +1473,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/widget/widget-edit/widget-image/widget-image.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class='container big-boy'>\n  <h6>Name</h6>\n  <input [(ngModel)]='widgetName' name='widgetName' type='text' class='form-control' placeholder='Name'>\n  <h6>Text</h6>\n  <input [(ngModel)]='widgetText' name='widgetText' type='text' class='form-control' placeholder='Text goes here'>\n  <h6>Url</h6>\n  <input [(ngModel)]='widgetUrl' name='widgetUrl' type='text' class='form-control' placeholder='paste your url'>\n  <h6>Width</h6>\n  <input [(ngModel)]='widgetWidth' name='widgetWidth' type='text' class='form-control' placeholder='100%'>\n  <h6>Upload</h6>\n  <input type=\"file\" name=\"pic\" accept=\"image/*\">\n  <button type='button' class='btn btn-primary btn-block'>Upload Image</button>\n</div>\n"
+module.exports = "<div class='container big-boy'>\n  <h6>Text</h6>\n  <input [(ngModel)]='widgetText' name='widgetText' type='text' class='form-control' placeholder='Text goes here'>\n  <h6>Url</h6>\n  <input [(ngModel)]='widgetUrl' name='widgetUrl' type='text' class='form-control' placeholder='paste your url'>\n  <h6>Width</h6>\n  <input [(ngModel)]='widgetWidth' name='widgetWidth' type='text' class='form-control' placeholder='100%'>\n  <h6>Upload</h6>\n  <input type=\"file\" name=\"pic\" accept=\"image/*\">\n  <button type='button' class='btn btn-primary btn-block'>Upload Image</button>\n</div>\n"
 
 /***/ }),
 
@@ -1515,14 +1513,12 @@ var WidgetImageComponent = (function () {
             _this.widgetId = params['wgid'];
             _this.widgetService.findWidgetById(_this.widgetId).subscribe(function (widget) {
                 _this.widget = widget;
-                _this.widgetName = _this.widget.name;
             });
         });
     };
     WidgetImageComponent.prototype.updateWidget = function () {
         var _this = this;
-        if (this.widgetName != null && this.widgetText != null && this.widgetWidth != null) {
-            this.widget.name = this.widgetName;
+        if (this.widgetText != null && this.widgetWidth != null) {
             this.widget.text = this.widgetText;
             this.widget.width = this.widgetWidth;
             this.widget.url = this.widgetUrl;
@@ -1568,7 +1564,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/widget/widget-edit/widget-youtube/widget-youtube.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- This is the God container -->\n<div class='container'>\n  <h6>Name</h6>\n  <input [(ngModel)]='widgetName' name='widgetName' type='text' class='form-control' placeholder='Name'>\n  <h6>Text</h6>\n  <input [(ngModel)]='widgetText' name='widgetText' type='text' class='form-control' placeholder='Text goes here'>\n  <h6>Url</h6>\n  <input [(ngModel)]='widgetUrl' name='widgetUrl' type='text' class='form-control' placeholder='paste your url'>\n  <h6>Width</h6>\n  <input [(ngModel)]='widgetWidth' name='widgetWidth' type='text' class='form-control' placeholder='100%'>\n</div>\n"
+module.exports = "<!-- This is the God container -->\n<div class='container'>\n  <h6>Text</h6>\n  <input [(ngModel)]='widgetText' name='widgetText' type='text' class='form-control' placeholder='Text goes here'>\n  <h6>Url</h6>\n  <input [(ngModel)]='widgetUrl' name='widgetUrl' type='text' class='form-control' placeholder='paste your url'>\n  <h6>Width</h6>\n  <input [(ngModel)]='widgetWidth' name='widgetWidth' type='text' class='form-control' placeholder='100%'>\n</div>\n"
 
 /***/ }),
 
@@ -1608,13 +1604,11 @@ var WidgetYoutubeComponent = (function () {
             _this.widgetId = params['wgid'];
             _this.widgetService.findWidgetById(_this.widgetId).subscribe(function (widget) {
                 _this.widget = widget;
-                _this.widgetName = _this.widget.name;
             });
         });
     };
     WidgetYoutubeComponent.prototype.updateWidget = function () {
         var _this = this;
-        this.widget.name = this.widgetName;
         this.widget.text = this.widgetText;
         this.widget.width = this.widgetWidth;
         this.widget.url = this.widgetUrl;
@@ -1740,11 +1734,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var PageService = (function () {
     function PageService(http) {
         this.http = http;
-        this.pages = [
-            { "_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem" },
-            { "_id": "432", "name": "Post 2", "websiteId": "456", "description": "Lorem" },
-            { "_id": "543", "name": "Post 3", "websiteId": "456", "description": "Lorem" }
-        ];
     }
     //adds the page parameter instance to the local pages array.
     //The new page's websiteId is set to the websiteId parameter
@@ -1884,12 +1873,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var UserService = (function () {
     function UserService(http) {
         this.http = http;
-        this.users = [
-            { _id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder" },
-            { _id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley" },
-            { _id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia" },
-            { _id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose", lastName: "Annunzi" }
-        ];
         this.api = {
             'createUser': this.createUser,
             'findUserById': this.findUserById
@@ -1911,11 +1894,10 @@ var UserService = (function () {
     };
     // returns the user in local users array whose username matches the parameter username
     UserService.prototype.findUserByUsername = function (username) {
-        for (var x = 0; x < this.users.length; x++) {
-            if (username === this.users[x].username) {
-                return this.users[x];
-            }
-        }
+        var url = 'http://localhost:3100/api/user?username=' + username;
+        return this.http.get(url).map(function (response) {
+            return response.json();
+        });
     };
     //returns the user whose username and password match the username and password parameters
     UserService.prototype.findUserByCredentials = function (username, password) {
@@ -1926,11 +1908,6 @@ var UserService = (function () {
     };
     // updates the user in local users array whose _id matches the userId parameter
     UserService.prototype.updateUser = function (userId, user) {
-        //for (let x = 0; x < this.users.length; x ++) {
-        //if (userId === this.users[x]._id) {
-        //this.users[x] = user;
-        //}
-        //}
         var url = 'http://localhost:3100/api/user/' + userId;
         return this.http.put(url, user).map(function (response) {
             return response.json();
@@ -1938,11 +1915,10 @@ var UserService = (function () {
     };
     // removes the user whose _id matches the userId parameter
     UserService.prototype.deleteUser = function (userId) {
-        for (var x = 0; x < this.users.length; x++) {
-            if (userId === this.users[x]._id) {
-                this.users.splice(x, 1);
-            }
-        }
+        var url = 'http://localhost:3100/api/user/' + userId;
+        return this.http.delete(url).map(function (response) {
+            return response.json();
+        });
     };
     return UserService;
 }());
@@ -1981,15 +1957,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var WebsiteService = (function () {
     function WebsiteService(http) {
         this.http = http;
-        this.websites = [
-            { "_id": "123", "name": "Facebook", "developerId": "456", "description": "Lorem" },
-            { "_id": "234", "name": "Tweeter", "developerId": "456", "description": "Lorem" },
-            { "_id": "456", "name": "Gizmodo", "developerId": "456", "description": "Lorem" },
-            { "_id": "890", "name": "Go", "developerId": "123", "description": "Lorem" },
-            { "_id": "567", "name": "Tic Tac Toe", "developerId": "123", "description": "Lorem" },
-            { "_id": "678", "name": "Checkers", "developerId": "123", "description": "Lorem" },
-            { "_id": "789", "name": "Chess", "developerId": "234", "description": "Lorem" }
-        ];
     }
     // adds the website parameter instance to the local websites array.
     // The new website's developerId is set to the userId parameter
@@ -2064,17 +2031,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var WidgetService = (function () {
     function WidgetService(http) {
         this.http = http;
-        this.widgets = [
-            { "_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO" },
-            { "_id": "234", "widgetType": "HEADING", "pageId": "321", "size": 4, "text": "Lorem ipsum" },
-            { "_id": "345", "widgetType": "IMAGE", "pageId": "321", "width": "100%",
-                "url": "http://lorempixel.com/400/200/" },
-            { "_id": "456", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>" },
-            { "_id": "567", "widgetType": "HEADING", "pageId": "321", "size": 4, "text": "Lorem ipsum" },
-            { "_id": "678", "widgetType": "YOUTUBE", "pageId": "321", "width": "100%",
-                "url": "https://youtu.be/AM2Ivdi9c4E" },
-            { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>" }
-        ];
     }
     // adds the widget parameter instance to the local widgets array.
     // The new widget's pageId is set to the pageId parameter

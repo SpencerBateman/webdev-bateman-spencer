@@ -37,7 +37,7 @@ module.exports = function(app) {
   }
 
   function findWidgetById(req, res) {
-    const pageId = req.params['pageId'];
+    const widgetId = req.params['widgetId'];
     const widget = widgets.find(function (widget) {
       return widget._id == widgetId;
     });

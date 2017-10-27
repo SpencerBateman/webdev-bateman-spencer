@@ -15,7 +15,6 @@ export class WidgetHeaderComponent implements OnInit {
   pageId: string;
   widgetId: string;
   widget: any;
-  widgetName: string;
   widgetText: string;
   widgetSize: number;
 
@@ -29,7 +28,6 @@ export class WidgetHeaderComponent implements OnInit {
       this.widgetId = params['wgid'];
       this.widgetService.findWidgetById(this.widgetId).subscribe((widget: any) => {
         this.widget = widget;
-        this.widgetName = widget.name;
         this.widgetText = widget.text;
         this.widgetSize = widget.size;
       });
@@ -37,8 +35,7 @@ export class WidgetHeaderComponent implements OnInit {
   }
 
   updateWidget() {
-    if (this.widgetName != null && this.widgetText != null && this.widgetSize != null && this.widgetSize > 0 && this.widgetSize < 7) {
-      this.widget.name = this.widgetName;
+    if (this.widgetText != null && this.widgetSize != null && this.widgetSize > 0 && this.widgetSize < 7) {
       this.widget.text = this.widgetText;
       this.widget.size = this.widgetSize;
       this.widgetService.updateWidget(this.widgetId, this.widget).subscribe((widget: any) => {
