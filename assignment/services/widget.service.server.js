@@ -25,6 +25,7 @@ module.exports = function(app) {
     widget._id = Math.floor(Math.random() * 1000 + 1).toString();
     widget.pageId = pageId;
     widgets.push(widget);
+    console.log(widget);
     res.json(widget);
   }
 

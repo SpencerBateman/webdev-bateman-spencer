@@ -1221,7 +1221,7 @@ var WidgetChooserComponent = (function () {
     };
     WidgetChooserComponent.prototype.createWidget = function (type) {
         var _this = this;
-        var new_widget = { _id: "", widgetType: type, pageId: this.pageId };
+        var new_widget = { _id: "", widgetType: type, pageId: this.pageId, text: '' };
         this.widgetService.createWidget(this.pageId, new_widget).subscribe(function (widget) {
             _this.router.navigate(['/user', _this.userId, 'website', _this.websiteId, 'page', _this.pageId, 'widget', widget._id]);
         });
@@ -1309,7 +1309,7 @@ var WidgetEditComponent = (function () {
             _this.widgetId = params['wgid'];
             _this.widgetService.findWidgetById(_this.widgetId).subscribe(function (widget) {
                 _this.widget = widget;
-                console.log(widget);
+                console.log(_this.widget.widgetType);
             });
         });
     };
@@ -1604,6 +1604,7 @@ var WidgetYoutubeComponent = (function () {
             _this.widgetId = params['wgid'];
             _this.widgetService.findWidgetById(_this.widgetId).subscribe(function (widget) {
                 _this.widget = widget;
+                console.log(widget);
             });
         });
     };
