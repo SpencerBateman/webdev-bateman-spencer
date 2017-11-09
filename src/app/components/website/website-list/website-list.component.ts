@@ -13,7 +13,6 @@ export class WebsiteListComponent implements OnInit {
   userId: string;
   websites: any;
 
-
   constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {

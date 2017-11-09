@@ -31,7 +31,7 @@ export class WebsiteNewComponent implements OnInit {
 
   createWebsite() {
     if (this.websiteName != null && this.websiteDescription != null) {
-      const new_website = {_id: 0, name: this.websiteName, developerId: this.userId, description: this.websiteDescription}
+      const new_website = {name: this.websiteName, _user: this.userId, description: this.websiteDescription}
 
       this.websiteService.createWebsite(this.userId, new_website).subscribe((website) => {
         this.router.navigate(['./user', this.userId, 'website']);
