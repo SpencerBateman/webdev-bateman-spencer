@@ -26,7 +26,6 @@ module.exports = function(app) {
     widget._id = Math.floor(Math.random() * 1000 + 1).toString();
     widget.pageId = pageId;
     widgets.push(widget);
-    console.log(widget);
     res.json(widget);
   }
 
@@ -51,7 +50,7 @@ module.exports = function(app) {
     var widget = req.body;
     var widgetId = req.params['widgetId'];
 
-    for (let x = 0; x < widget.length; x++) {
+    for (let x = 0; x < widgets.length; x++) {
       if (widgetId === widgets[x]._id) {
         widgets[x] = widget;
       }

@@ -36,8 +36,11 @@ export class WidgetHeaderComponent implements OnInit {
 
   updateWidget() {
     if (this.widgetText != null && this.widgetSize != null && this.widgetSize > 0 && this.widgetSize < 7) {
+      console.log('Hello');
+      console.log(this.widgetText + 'Hello');
       this.widget.text = this.widgetText;
       this.widget.size = this.widgetSize;
+      console.log(this.widget);
       this.widgetService.updateWidget(this.widgetId, this.widget).subscribe((widget: any) => {
         this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget'])
       });

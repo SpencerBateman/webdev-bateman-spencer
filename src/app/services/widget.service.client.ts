@@ -23,6 +23,8 @@ export class WidgetService {
   findWidgetsByPageId(pageId: string) {
     const url = 'http://localhost:3100/api/page/' + pageId + '/widget';
     return this.http.get(url).map((response: Response) => {
+      console.log("server response");
+      console.log(response.json());
       return response.json();
     });
   }

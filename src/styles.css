@@ -72,3 +72,7 @@ input {
 .salb-clickable:hover {
   cursor: pointer;
 }
+
+.salb-padding {
+  height: 100px;
+}

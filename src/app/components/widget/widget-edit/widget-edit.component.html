@@ -14,7 +14,7 @@
   </div>
 </header>
 <div class="container big-boy">
-  <div [ngSwitch]="widget.widgetType">
+  <div [ngSwitch]="widgetType">
     <div *ngSwitchCase="'HEADING'">
       <app-widget-header></app-widget-header>
     </div>
