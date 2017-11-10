@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { WidgetService } from '../../../../services/widget.service.client';
+import { FlickrImageSearchComponent } from './flickr-image-search/flickr-image-search.component';
 
 @Component({
   selector: 'app-widget-image',
@@ -9,6 +10,9 @@ import { WidgetService } from '../../../../services/widget.service.client';
   styleUrls: ['./widget-image.component.css']
 })
 export class WidgetImageComponent implements OnInit {
+
+  @ViewChild(FlickrImageSearchComponent)
+  private flickrImageSearchComponent: FlickrImageSearchComponent;
 
   userId: string;
   websiteId: string;

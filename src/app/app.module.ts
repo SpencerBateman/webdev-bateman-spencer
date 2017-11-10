@@ -28,6 +28,8 @@ import { UserService } from './services/user.service.client';
 import { WebsiteService } from './services/website.service.client';
 import { PageService } from './services/page.service.client';
 import { WidgetService } from './services/widget.service.client';
+import { FlickrImageSearchComponent } from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
+import {FlickrImageService} from "./services/flickr.service.client";
 
 
 @NgModule({
@@ -50,7 +52,8 @@ import { WidgetService } from './services/widget.service.client';
     WidgetListComponent,
     WidgetHeaderComponent,
     WidgetImageComponent,
-    WidgetYoutubeComponent
+    WidgetYoutubeComponent,
+    FlickrImageSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,7 @@ import { WidgetService } from './services/widget.service.client';
     Routing
   ],
   // Client Side services here
-  providers: [ UserService, WebsiteService, PageService, WidgetService, TestService],
+  providers: [ UserService, WebsiteService, PageService, WidgetService, TestService, FlickrImageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -45,21 +45,19 @@ module.exports = function(app) {
     var widget = req.body;
     var widgetId = req.params['widgetId'];
 
-    for (let x = 0; x < widgets.length; x++) {
-      if (widgetId === widgets[x]._id) {
-        widgets[x] = widget;
-      }
-    }
-    res.json(widgets);
+    widgetModel
+      .updateWidget(widgetId, widget)
+      .then(function(widget) {
+        res.json({});
+      });
   }
 
   function deleteWidget(req, res) {
     var widgetId = req.params['widgetId'];
-    for (let x = 0; x < widgets.length; x ++) {
-      if (widgetId === widgets[x]._id) {
-        widgets.splice(x, 1);
-      }
-    }
-    res.json(widgets);
+    widgetModel
+      .deleteWidget(widgetId)
+      .then(function() {
+        res.json({});
+      });
   }
 }
