@@ -28,7 +28,7 @@ export class WidgetEditComponent implements OnInit {
   pageId: string;
   widgetId: string;
   widget: any;
-  widgetType: string;
+  type: string;
   widgetSize: number;
 
   constructor(private widgetService: WidgetService, private router: Router, private activatedRoute: ActivatedRoute) { }
@@ -40,9 +40,8 @@ export class WidgetEditComponent implements OnInit {
       this.pageId = params['pid'];
       this.widgetId = params['wgid'];
       this.widgetService.findWidgetById(this.widgetId).subscribe((widget) => {
-        console.log(widget);
         this.widget = widget;
-        this.widgetType = widget.widgetType;
+        this.type = widget.widgetType;
       });
     });
 
@@ -55,10 +54,10 @@ export class WidgetEditComponent implements OnInit {
   }
 
   updateWidget() {
-    switch(this.widgetType) {
-      case 'HEADING': this.headerComponent.updateWidget(); break;
-      case 'IMAGE': this.widgetImageComponent.updateWidget(); break;
-      case 'YOUTUBE': this.widgetYoutubeComponent.updateWidget(); break;
+    switch(this.type) {
+      case "HEADING": this.headerComponent.updateWidget(); break;
+      case "IMAGE": this.widgetImageComponent.updateWidget(); break;
+      case "YOUTUBE": this.widgetYoutubeComponent.updateWidget(); break;
     }
   }
 }

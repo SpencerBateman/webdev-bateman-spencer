@@ -17,9 +17,9 @@
 <div class='container big-boy'>
   <div *ngFor="let widget of widgets">
 
-    <div [ngSwitch]="widget.widgetType">
+    <div [ngSwitch]="widget.type">
 
-      <div *ngSwitchCase="'HEADING'">
+      <div *ngSwitchCase='"HEADING"'>
         <div class='salb-widget'>
           <div class='salb-widget__box'>
             <a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget._id]"><span class='glyphicon glyphicon-cog salb-glyphicon salb-blue'></span></a>
@@ -57,8 +57,7 @@
       </div>
     </div>
   </div>
-  <div class='salb-padding'>
-  </div>
+  <div class='salb-padding'></div>
 
   <footer class='salb-bg-grey navbar-fixed-bottom'>
     <div class='container'>
