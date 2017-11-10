@@ -5,6 +5,7 @@ import { WidgetService } from '../../../services/widget.service.client';
 import { WidgetHeaderComponent } from './widget-header/widget-header.component';
 import { WidgetImageComponent } from './widget-image/widget-image.component';
 import { WidgetYoutubeComponent } from './widget-youtube/widget-youtube.component';
+import { WidgetTextComponent } from './widget-text/widget-text.component';
 
 @Component({
   selector: 'app-widget-edit',
@@ -22,6 +23,9 @@ export class WidgetEditComponent implements OnInit {
 
   @ViewChild(WidgetYoutubeComponent)
   private widgetYoutubeComponent: WidgetYoutubeComponent;
+
+  @ViewChild(WidgetTextComponent)
+  private widgetTextComponent: WidgetTextComponent;
 
   userId: string;
   websiteId: string;
@@ -58,6 +62,7 @@ export class WidgetEditComponent implements OnInit {
       case "HEADING": this.headerComponent.updateWidget(); break;
       case "IMAGE": this.widgetImageComponent.updateWidget(); break;
       case "YOUTUBE": this.widgetYoutubeComponent.updateWidget(); break;
+      case "TEXT": this.widgetTextComponent.updateWidget(); break;
     }
   }
 }

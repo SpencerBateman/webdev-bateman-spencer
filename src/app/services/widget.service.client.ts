@@ -13,6 +13,7 @@ export class WidgetService {
   // adds the widget parameter instance to the local widgets array.
   // The new widget's pageId is set to the pageId parameter
   createWidget(pageId: string, widget: any) {
+    console.log(widget);
     const url = 'http://localhost:3100/api/page/' + pageId + '/widget';
     return this.http.post(url, widget).map((response: Response) => {
       return response.json();

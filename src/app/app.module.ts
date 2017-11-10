@@ -30,6 +30,7 @@ import { PageService } from './services/page.service.client';
 import { WidgetService } from './services/widget.service.client';
 import { FlickrImageSearchComponent } from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
 import {FlickrImageService} from "./services/flickr.service.client";
+import { WidgetTextComponent } from './components/widget/widget-edit/widget-text/widget-text.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import {FlickrImageService} from "./services/flickr.service.client";
     WidgetHeaderComponent,
     WidgetImageComponent,
     WidgetYoutubeComponent,
-    FlickrImageSearchComponent
+    FlickrImageSearchComponent,
+    WidgetTextComponent
   ],
   imports: [
     BrowserModule,

@@ -55,6 +55,12 @@
           <img class="zlr-content" src={{widget.url}} [style.width]="widget.width"/>
         </div>
       </div>
+
+      <div *ngSwitchCase="'TEXT'">
+        <div *ngIf="widget.formatted" text-angular ng-model="..."></div>
+        <input *ngIf="!widget.formatted && (!widget.row || widget.row===1)" placeholder="{{placeholder}}" class="form-control"/>
+        <textarea *ngIf="!widget.formatted && (widget.rows > 1)" rows="{{widget.rows}}" placeholder="{{widget.placeholder}}" class="form-control">{{widget.text}}</textarea>
+      </div>
     </div>
   </div>
   <div class='salb-padding'></div>

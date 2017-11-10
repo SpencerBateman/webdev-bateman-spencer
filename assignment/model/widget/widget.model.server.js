@@ -9,6 +9,7 @@ WidgetModel.updateWidget = updateWidget;
 WidgetModel.deleteWidget = deleteWidget;
 
 function createWidget(pageId, widget) {
+  console.log(widget);
   return WidgetModel.create(widget);
 }
 
