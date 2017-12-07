@@ -1,0 +1,8 @@
+{
+  "env": {
+    "SESSION_SECRET": "123456",
+    "FACEBOOK_CLIENT_ID": "311037982731356",
+    "FACEBOOK_CLIENT_SECRET": "72762b9fcfa4fe52644b3bce519484b9",
+    "FACEBOOK_CALLBACK_URL": "http://127.0.0.1:3100/facebook/oauth2callback"
+  }
+}

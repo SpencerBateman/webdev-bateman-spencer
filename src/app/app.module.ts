@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { TestComponent } from './components/test/test.component';
@@ -25,12 +24,15 @@ import { WidgetImageComponent } from './components/widget/widget-edit/widget-ima
 import { WidgetYoutubeComponent } from './components/widget/widget-edit/widget-youtube/widget-youtube.component';
 
 import { UserService } from './services/user.service.client';
+import {AuthenticationService} from './services/authentication.service.client';
 import { WebsiteService } from './services/website.service.client';
 import { PageService } from './services/page.service.client';
 import { WidgetService } from './services/widget.service.client';
+import { SharedService } from './services/shared.service.client';
 import { FlickrImageSearchComponent } from './components/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
-import {FlickrImageService} from "./services/flickr.service.client";
+import { FlickrImageService } from "./services/flickr.service.client";
 import { WidgetTextComponent } from './components/widget/widget-edit/widget-text/widget-text.component';
+
 
 
 @NgModule({
@@ -64,7 +66,7 @@ import { WidgetTextComponent } from './components/widget/widget-edit/widget-text
     Routing
   ],
   // Client Side services here
-  providers: [ UserService, WebsiteService, PageService, WidgetService, TestService, FlickrImageService],
+  providers: [ UserService, WebsiteService, PageService, WidgetService, TestService, FlickrImageService, SharedService, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
