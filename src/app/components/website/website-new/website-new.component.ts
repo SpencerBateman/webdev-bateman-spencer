@@ -16,6 +16,7 @@ export class WebsiteNewComponent implements OnInit {
   websiteDescription: string;
   websites: any;
   websiteId: string;
+  errorFlag: boolean;
 
   constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
@@ -36,6 +37,8 @@ export class WebsiteNewComponent implements OnInit {
       this.websiteService.createWebsite(this.userId, new_website).subscribe((website) => {
         this.router.navigate(['./user', this.userId, 'website']);
       });
+    } else {
+      this.errorFlag = true;
     }
   }
 }

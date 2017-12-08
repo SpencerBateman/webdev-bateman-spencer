@@ -17,9 +17,13 @@
 <!-- This is the God container -->
 <div class='container'>
   <h6>Name</h6>
-    <input name="pageName" [(ngModel)]="pageName" type='text' class='form-control' placeholder='Name'>
-    <h6>Title</h6>
-    <input name="pageDescription" [(ngModel)]="pageDescription" type='text' class='form-control' placeholder='Page Title'>
+  <input name="pageName" [(ngModel)]="pageName" type='text' class='form-control' placeholder='Name'>
+  <h6>Title</h6>
+  <input name="pageDescription" [(ngModel)]="pageDescription" type='text' class='form-control' placeholder='Page Title'>
+  <div *ngIf="errorFlag"
+    class="alert alert-danger">
+    Both fields are required
+  </div>
 </div>
 
 <footer class='salb-bg-grey navbar-fixed-bottom'>

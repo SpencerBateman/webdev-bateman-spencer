@@ -21,6 +21,10 @@
   <h6>Title</h6>
   <input [(ngModel)]="pageDescription" name="pageDescription" type='text' class='form-control' placeholder='Page Title'>
   <a (click)="deletePage()"><button type='button' class='btn btn-danger btn-block'>Delete</button></a>
+  <div *ngIf="errorFlag"
+    class="alert alert-danger">
+    Both fields are required
+  </div>
 </div>
 
 <footer class='salb-bg-grey navbar-fixed-bottom'>

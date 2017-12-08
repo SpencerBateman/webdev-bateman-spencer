@@ -21,11 +21,13 @@ export class UserService {
     'login': this.login
   };
 
-  register(username, password) {
+  register(username, password, firstName, lastName) {
     const url = 'http://localhost:3100/api/register';
     const credentials = {
       username: username,
-      password: password
+      password: password,
+      firstName: firstName,
+      lastName: lastName
     };
     this.options.withCredentials = true;
     return this.http.post(url, credentials, this.options)

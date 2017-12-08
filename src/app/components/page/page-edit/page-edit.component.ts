@@ -16,6 +16,7 @@ export class PageEditComponent implements OnInit {
   pageDescription: string;
   pageId: string;
   page: any;
+  errorFlag: boolean;
 
   constructor(private pageService: PageService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
@@ -42,10 +43,15 @@ export class PageEditComponent implements OnInit {
   }
 
   updatePage() {
-    this.page.name = this.pageName;
-    this.page.description = this.pageDescription;
-    this.pageService.updatePage(this.pageId, this.page).subscribe((page: any) => {
-      this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
-    });
+    if (this.pageName != '' && this.pageDescription != '') {
+      this.page.name = this.pageName;
+      this.page.description = this.pageDescription;
+      this.pageService.updatePage(this.pageId, this.page).subscribe((page: any) => {
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+      });
+
+    } else {
+      this.errorFlag = true;
+    }
   }
 }

@@ -35,7 +35,12 @@
       <input name="websiteName" [(ngModel)]="websiteName" type='text' class='form-control' placeholder='Name'>
       <h6>Description</h6>
       <textarea name="websiteDescription" [(ngModel)]="websiteDescription" type='text' rows="4" class='form-control' placeholder='Description'></textarea>
+  <div *ngIf="errorFlag"
+    class="alert alert-danger">
+    Both fields are required
+  </div>
     </div>
+
   </div>
 </div>
 

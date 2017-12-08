@@ -37,6 +37,10 @@
       <textarea name="websiteDescription" [(ngModel)]="websiteDescription" type='text' rows="4" class='form-control' placeholder='Description'></textarea>
 
       <button (click)="deleteWebsite()" type='button' class='btn btn-danger btn-block'>Delete</button>
+      <div *ngIf="errorFlag"
+        class="alert alert-danger">
+        Both fields are required
+      </div>
     </div>
   </div>
 </div>

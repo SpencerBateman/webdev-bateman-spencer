@@ -16,6 +16,7 @@ export class WebsiteEditComponent implements OnInit {
   websiteDescription: string;
   websites: any;
   websiteId: string;
+  errorFlag: boolean;
 
   constructor(private websiteService: WebsiteService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
@@ -35,11 +36,15 @@ export class WebsiteEditComponent implements OnInit {
   }
 
   editWebsite() {
+    if (this.websiteName != null && this.websiteDescription != null && this.websiteName != '' && this.websiteDescription != '') {
     this.website.name = this.websiteName;
     this.website.description = this.websiteDescription;
     this.websiteService.updateWebsite(this.websiteId, this.website).subscribe((websites: any) => {
       this.router.navigate(['./user', this.userId, 'website']);
     });
+    } else {
+      this.errorFlag = true;
+    }
   }
 
   deleteWebsite() {

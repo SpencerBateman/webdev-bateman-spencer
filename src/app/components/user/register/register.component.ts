@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
   lastName: string;
   password: string;
   conf_password: string;
+  errorFlag: boolean;
 
   constructor(private sharedService: SharedService, private userService: UserService, private router: Router) { }
 
@@ -22,9 +23,13 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    this.userService.register(this.username, this.password).subscribe((user) =>  {
+    if (this.username != null && this.firstName != null && this.lastName != null && this.password != null && this.conf_password != null) {
+      this.userService.register(this.username, this.password, this.firstName, this.lastName).subscribe((user) =>  {
         this.sharedService.user = user;
         this.router.navigate(['/profile']);
       });
+    } else {
+      this.errorFlag = true;
+    }
   }
 }

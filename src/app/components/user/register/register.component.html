@@ -1,4 +1,8 @@
 <div class="container">
+  <div *ngIf="errorFlag"
+    class="alert alert-danger">
+    Please fill out all fields. All Fields are required
+  </div>
   <h1>Register</h1>
   <form (ngSubmit) = "register()" #f="ngForm">
     <input name='username' [(ngModel)]='username' type='text' class='form-control' placeholder='Please Enter A Username'>

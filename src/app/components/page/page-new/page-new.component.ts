@@ -15,6 +15,7 @@ export class PageNewComponent implements OnInit {
   websiteId: string;
   pageName: string;
   pageDescription: string;
+  errorFlag: boolean;
 
   constructor(private pageService: PageService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
@@ -26,10 +27,15 @@ export class PageNewComponent implements OnInit {
   }
 
   newPage() {
-    const new_page = {name: this.pageName, _website: this.websiteId, description: this.pageDescription};
+    if (this.pageName != null && this.pageDescription != null) {
 
-    this.pageService.createPage(this.websiteId, new_page).subscribe((page: any) => {
-      this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
-    });
+      const new_page = {name: this.pageName, _website: this.websiteId, description: this.pageDescription};
+
+      this.pageService.createPage(this.websiteId, new_page).subscribe((page: any) => {
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+      });
+    } else {
+      this.errorFlag = true;
+    }
   }
 }
