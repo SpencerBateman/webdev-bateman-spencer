@@ -36,6 +36,7 @@ export class WidgetTextComponent implements OnInit {
   }
 
   updateWidget() {
+    if (this.row != null && this.placeholder != null) {
     this.widget.row = this.row;
     this.widget.placeholder = this.placeholder;
     this.widget.formatted = this.formatted;
@@ -43,6 +44,9 @@ export class WidgetTextComponent implements OnInit {
     this.widgetService.updateWidget(this.widgetId, this.widget).subscribe((widget: any) => {
       this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
     });
+    } else {
+      this.errorFlag = true;
+    }
   }
 
 }
