@@ -22,7 +22,7 @@ export class UserService {
   };
 
   register(username, password, firstName, lastName) {
-    const url = 'https://localhost:3100/api/register';
+    const url = '/api/register';
     const credentials = {
       username: username,
       password: password,
