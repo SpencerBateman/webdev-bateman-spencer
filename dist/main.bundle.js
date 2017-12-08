@@ -2274,7 +2274,7 @@ var UserService = (function () {
         };
     }
     UserService.prototype.register = function (username, password, firstName, lastName) {
-        var url = 'http://localhost:3100/api/register';
+        var url = 'https://localhost:3100/api/register';
         var credentials = {
             username: username,
             password: password,
@@ -2288,7 +2288,7 @@ var UserService = (function () {
         });
     };
     UserService.prototype.logout = function () {
-        var url = 'http://localhost:3100/api/logout';
+        var url = 'https://localhost:3100/api/logout';
         this.options.withCredentials = true;
         return this.http.post(url, '', this.options)
             .map(function (status) {
@@ -2298,7 +2298,7 @@ var UserService = (function () {
     UserService.prototype.loggedIn = function () {
         var _this = this;
         this.options.withCredentials = true;
-        var url = 'http://localhost:3100/api/loggedIn';
+        var url = 'https://localhost:3100/api/loggedIn';
         return this.http.post(url, '', this.options)
             .map(function (res) {
             var user = res.json();
@@ -2315,7 +2315,7 @@ var UserService = (function () {
         });
     };
     UserService.prototype.login = function (username, password) {
-        var url = 'http://localhost:3100/api/login';
+        var url = 'https://localhost:3100/api/login';
         var credentials = {
             username: username,
             password: password
@@ -2532,11 +2532,6 @@ var _a;
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
-// The file contents for the current environment will overwrite these during build.
-// The build system defaults to the dev environment which uses `environment.ts`, but if you do
-// `ng build --env=prod` then `environment.prod.ts` will be used instead.
-// The list of which env maps to which file can be found in `.angular-cli.json`.
-// The file contents for the current environment will overwrite these during build.
 var environment = {
     production: false,
     baseUrl: 'http://localhost:3100'
