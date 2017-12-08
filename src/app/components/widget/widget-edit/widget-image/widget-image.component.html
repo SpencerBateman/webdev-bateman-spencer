@@ -8,5 +8,9 @@
   <h6>Upload</h6>
   <input type="file" name="pic" accept="image/*">
   <button type='button' class='btn btn-primary btn-block'>Upload Image</button>
+  <div *ngIf="errorFlag"
+    class="alert alert-danger">
+    Please fill out all of the fields
+  </div>
   <app-flickr-image-search></app-flickr-image-search>
 </div>

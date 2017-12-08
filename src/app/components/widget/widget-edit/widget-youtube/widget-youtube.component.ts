@@ -19,6 +19,7 @@ export class WidgetYoutubeComponent implements OnInit {
   widgetWidth: number;
   widgetUrl: string;
   widgetType: string;
+  errorFlag: boolean;
 
   constructor(private widgetService: WidgetService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -36,11 +37,15 @@ export class WidgetYoutubeComponent implements OnInit {
   }
 
   updateWidget() {
-    this.widget.text = this.widgetText;
-    this.widget.width = this.widgetWidth;
-    this.widget.url = this.widgetUrl;
-    this.widgetService.updateWidget(this.widgetId, this.widget).subscribe((widget: any) => {
-      this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
-    });
+    if (this.widgetText != null && this.widgetText != '' && this.widgetWidth != null && this.widgetUrl != null && this.widgetUrl != '') {
+      this.widget.text = this.widgetText;
+      this.widget.width = this.widgetWidth;
+      this.widget.url = this.widgetUrl;
+      this.widgetService.updateWidget(this.widgetId, this.widget).subscribe((widget: any) => {
+        this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+      });
+    } else {
+      this.errorFlag = true;
+    }
   }
 }

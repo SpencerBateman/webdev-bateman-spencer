@@ -19,6 +19,7 @@ export class WidgetTextComponent implements OnInit {
   row: number;
   placeholder: any;
   formatted: boolean;
+  errorFlag: boolean;
 
   constructor(private widgetService: WidgetService, private router: Router, private activatedRoute: ActivatedRoute) { }
 

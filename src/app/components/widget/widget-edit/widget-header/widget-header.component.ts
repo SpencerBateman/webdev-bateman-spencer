@@ -17,6 +17,7 @@ export class WidgetHeaderComponent implements OnInit {
   widget: any;
   widgetText: string;
   widgetSize: number;
+  errorFlag: boolean;
 
   constructor(private widgetService: WidgetService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -35,15 +36,18 @@ export class WidgetHeaderComponent implements OnInit {
   }
 
   updateWidget() {
-    if (this.widgetText != null && this.widgetSize != null && this.widgetSize > 0 && this.widgetSize < 7) {
-      console.log('Hello');
-      console.log(this.widgetText + 'Hello');
+    if (this.widgetText != null &&
+      this.widgetText != '' &&
+      this.widgetSize != null &&
+      this.widgetSize > 0 &&
+      this.widgetSize < 7) {
       this.widget.text = this.widgetText;
       this.widget.size = this.widgetSize;
-      console.log(this.widget);
       this.widgetService.updateWidget(this.widgetId, this.widget).subscribe((widget: any) => {
         this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget'])
       });
+    } else {
+      this.errorFlag = true;
     }
   }
 }
