@@ -2274,7 +2274,7 @@ var UserService = (function () {
         };
     }
     UserService.prototype.register = function (username, password, firstName, lastName) {
-        var url = 'https://localhost:3100/api/register';
+        var url = '/api/register';
         var credentials = {
             username: username,
             password: password,
