@@ -22,7 +22,7 @@ export class UserService {
   };
 
   register(username, password, firstName, lastName) {
-    const url = 'https://localhost:3100/api/register';
+    const url = 'http://localhost:3100/api/register';
     const credentials = {
       username: username,
       password: password,
@@ -37,7 +37,7 @@ export class UserService {
   }
 
   logout() {
-    const url = 'https://localhost:3100/api/logout';
+    const url = 'http://localhost:3100/api/logout';
     this.options.withCredentials = true;
     return this.http.post(url, '', this.options)
       .map((status) => {
@@ -47,7 +47,7 @@ export class UserService {
 
   loggedIn() {
     this.options.withCredentials = true;
-    const url = 'https://localhost:3100/api/loggedIn';
+    const url = 'http://localhost:3100/api/loggedIn';
     return this.http.post(url, '', this.options)
       .map((res: Response) => {
         const user = res.json();
@@ -64,7 +64,7 @@ export class UserService {
   }
 
   login(username, password) {
-    const url = 'https://localhost:3100/api/login';
+    const url = 'http://localhost:3100/api/login';
     const credentials = {
       username: username,
       password: password
@@ -80,7 +80,7 @@ export class UserService {
 
   // adds the user parameter instance to the local users array
   createUser(user: any) {
-    const url = 'https://localhost:3100/api/user';
+    const url = 'http://localhost:3100/api/user';
     return this.http.post(url, user).map((response: Response) => {
       return response.json();
     });
@@ -88,7 +88,7 @@ export class UserService {
 
   // returns the user in local users array whose _id matches the userId parameter
   findUserById(userId: string) {
-    const url = 'https://localhost:3100/api/user/' + userId;
+    const url = 'http://localhost:3100/api/user/' + userId;
     return this.http.get(url).map((response: Response) => {
       return response.json();
     });
@@ -96,7 +96,7 @@ export class UserService {
 
   // returns the user in local users array whose username matches the parameter username
   findUserByUsername(username: string) {
-    const url = 'https://localhost:3100/api/user?username=' + username;
+    const url = 'http://localhost:3100/api/user?username=' + username;
     return this.http.get(url).map((response: Response) => {
       return response.json();
     });
@@ -104,7 +104,7 @@ export class UserService {
 
   //returns the user whose username and password match the username and password parameters
   findUserByCredentials(username: string, password: string) {
-    var url = 'https://localhost:3100/api/user?username=' + username + '&password=' + password;
+    var url = 'http://localhost:3100/api/user?username=' + username + '&password=' + password;
 
     return this.http.get(url).map((response: Response) => {
       return response.json();
@@ -113,7 +113,7 @@ export class UserService {
 
   // updates the user in local users array whose _id matches the userId parameter
   updateUser(userId: string, user: any) {
-    const url = 'https://localhost:3100/api/user/' + userId;
+    const url = 'http://localhost:3100/api/user/' + userId;
 
     return this.http.put(url, user).map((response: Response) => {
       return response.json();
@@ -122,7 +122,7 @@ export class UserService {
 
   // removes the user whose _id matches the userId parameter
   deleteUser(userId: string) {
-    const url = 'https://localhost:3100/api/user/' + userId;
+    const url = 'http://localhost:3100/api/user/' + userId;
 
     return this.http.delete(url).map((response: Response) => {
       return response.json();

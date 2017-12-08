@@ -2274,7 +2274,7 @@ var UserService = (function () {
         };
     }
     UserService.prototype.register = function (username, password, firstName, lastName) {
-        var url = 'https://localhost:3100/api/register';
+        var url = 'http://localhost:3100/api/register';
         var credentials = {
             username: username,
             password: password,
@@ -2288,7 +2288,7 @@ var UserService = (function () {
         });
     };
     UserService.prototype.logout = function () {
-        var url = 'https://localhost:3100/api/logout';
+        var url = 'http://localhost:3100/api/logout';
         this.options.withCredentials = true;
         return this.http.post(url, '', this.options)
             .map(function (status) {
@@ -2298,7 +2298,7 @@ var UserService = (function () {
     UserService.prototype.loggedIn = function () {
         var _this = this;
         this.options.withCredentials = true;
-        var url = 'https://localhost:3100/api/loggedIn';
+        var url = 'http://localhost:3100/api/loggedIn';
         return this.http.post(url, '', this.options)
             .map(function (res) {
             var user = res.json();
@@ -2315,7 +2315,7 @@ var UserService = (function () {
         });
     };
     UserService.prototype.login = function (username, password) {
-        var url = 'https://localhost:3100/api/login';
+        var url = 'http://localhost:3100/api/login';
         var credentials = {
             username: username,
             password: password
@@ -2328,42 +2328,42 @@ var UserService = (function () {
     };
     // adds the user parameter instance to the local users array
     UserService.prototype.createUser = function (user) {
-        var url = 'https://localhost:3100/api/user';
+        var url = 'http://localhost:3100/api/user';
         return this.http.post(url, user).map(function (response) {
             return response.json();
         });
     };
     // returns the user in local users array whose _id matches the userId parameter
     UserService.prototype.findUserById = function (userId) {
-        var url = 'https://localhost:3100/api/user/' + userId;
+        var url = 'http://localhost:3100/api/user/' + userId;
         return this.http.get(url).map(function (response) {
             return response.json();
         });
     };
     // returns the user in local users array whose username matches the parameter username
     UserService.prototype.findUserByUsername = function (username) {
-        var url = 'https://localhost:3100/api/user?username=' + username;
+        var url = 'http://localhost:3100/api/user?username=' + username;
         return this.http.get(url).map(function (response) {
             return response.json();
         });
     };
     //returns the user whose username and password match the username and password parameters
     UserService.prototype.findUserByCredentials = function (username, password) {
-        var url = 'https://localhost:3100/api/user?username=' + username + '&password=' + password;
+        var url = 'http://localhost:3100/api/user?username=' + username + '&password=' + password;
         return this.http.get(url).map(function (response) {
             return response.json();
         });
     };
     // updates the user in local users array whose _id matches the userId parameter
     UserService.prototype.updateUser = function (userId, user) {
-        var url = 'https://localhost:3100/api/user/' + userId;
+        var url = 'http://localhost:3100/api/user/' + userId;
         return this.http.put(url, user).map(function (response) {
             return response.json();
         });
     };
     // removes the user whose _id matches the userId parameter
     UserService.prototype.deleteUser = function (userId) {
-        var url = 'https://localhost:3100/api/user/' + userId;
+        var url = 'http://localhost:3100/api/user/' + userId;
         return this.http.delete(url).map(function (response) {
             return response.json();
         });
