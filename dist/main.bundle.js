@@ -2079,6 +2079,7 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__ = __webpack_require__("../../../../rxjs/_esm5/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2091,43 +2092,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 // injecting the service into module
 var PageService = (function () {
     function PageService(http) {
         this.http = http;
+        this.baseUrl = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].baseUrl;
     }
     //adds the page parameter instance to the local pages array.
     //The new page's websiteId is set to the websiteId parameter
     PageService.prototype.createPage = function (websiteId, page) {
-        var url = 'http://localhost:3100/api/website/' + websiteId + '/page';
+        var url = this.baseUrl + '/api/website/' + websiteId + '/page';
         return this.http.post(url, page).map(function (response) {
             return response.json();
         });
     };
     // retrieves the pages in local pages array whose websiteId matches the parameter websiteId
     PageService.prototype.findPageByWebsiteId = function (websiteId) {
-        var url = 'http://localhost:3100/api/website/' + websiteId + '/page';
+        var url = this.baseUrl + '/api/website/' + websiteId + '/page';
         return this.http.get(url).map(function (response) {
             return response.json();
         });
     };
     // retrieves the page in local pages array whose _id matches the pageId parameter
     PageService.prototype.findPageById = function (pageId) {
-        var url = 'http://localhost:3100/api/page/' + pageId;
+        var url = this.baseUrl + '/api/page/' + pageId;
         return this.http.get(url).map(function (response) {
             return response.json();
         });
     };
     // updates the page in local pages array whose _id matches the pageId parameter
     PageService.prototype.updatePage = function (pageId, page) {
-        var url = 'http://localhost:3100/api/page/' + pageId;
+        var url = this.baseUrl + '/api/page/' + pageId;
         return this.http.put(url, page).map(function (response) {
             return response.json();
         });
     };
     // removes the page from local pages array whose _id matches the pageId parameter
     PageService.prototype.deletePage = function (pageId) {
-        var url = 'http://localhost:3100/api/page/' + pageId;
+        var url = this.baseUrl + '/api/page/' + pageId;
         return this.http.delete(url).map(function (response) {
             return response.json();
         });
@@ -2391,6 +2394,7 @@ var _a, _b, _c;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__ = __webpack_require__("../../../../rxjs/_esm5/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2403,43 +2407,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 // injecting the service into module
 var WebsiteService = (function () {
     function WebsiteService(http) {
         this.http = http;
+        this.baseUrl = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].baseUrl;
     }
     // adds the website parameter instance to the local websites array.
     // The new website's developerId is set to the userId parameter
     WebsiteService.prototype.createWebsite = function (userId, website) {
-        var url = 'http://localhost:3100/api/user/' + userId + '/website';
+        var url = this.baseUrl + '/api/user/' + userId + '/website';
         return this.http.post(url, website).map(function (response) {
             return response.json();
         });
     };
     // retrieves the websites in local websites array whose developerId matches the parameter userId
     WebsiteService.prototype.findWebsiteByUser = function (userId) {
-        var url = 'http://localhost:3100/api/user/' + userId + '/website';
+        var url = this.baseUrl + '/api/user/' + userId + '/website';
         return this.http.get(url).map(function (response) {
             return response.json();
         });
     };
     // retrieves the website in local websites array whose _id matches the websiteId parameter
     WebsiteService.prototype.findWebsiteById = function (websiteId) {
-        var url = 'http://localhost:3100/api/website/' + websiteId;
+        var url = this.baseUrl + '/api/website/' + websiteId;
         return this.http.get(url).map(function (response) {
             return response.json();
         });
     };
     // updates the website in local websites array whose _id matches the websiteId parameter
     WebsiteService.prototype.updateWebsite = function (websiteId, website) {
-        var url = 'http://localhost:3100/api/website/' + websiteId;
+        var url = this.baseUrl + '/api/website/' + websiteId;
         return this.http.put(url, website).map(function (response) {
             return response.json();
         });
     };
     // removes the website from local websites array whose _id matches the websiteId parameter
     WebsiteService.prototype.deleteWebsite = function (websiteId) {
-        var url = 'http://localhost:3100/api/website/' + websiteId;
+        var url = this.baseUrl + '/api/website/' + websiteId;
         return this.http.delete(url).map(function (response) {
             return response.json();
         });
@@ -2464,6 +2470,7 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__ = __webpack_require__("../../../../rxjs/_esm5/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2476,44 +2483,46 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 // injecting the service into module
 var WidgetService = (function () {
     function WidgetService(http) {
         this.http = http;
+        this.baseUrl = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].baseUrl;
     }
     // adds the widget parameter instance to the local widgets array.
     // The new widget's pageId is set to the pageId parameter
     WidgetService.prototype.createWidget = function (pageId, widget) {
         console.log(widget);
-        var url = 'http://localhost:3100/api/page/' + pageId + '/widget';
+        var url = this.baseUrl + '/api/page/' + pageId + '/widget';
         return this.http.post(url, widget).map(function (response) {
             return response.json();
         });
     };
     // retrieves the widgets in local widgets array whose pageId matches the parameter pageId
     WidgetService.prototype.findWidgetsByPageId = function (pageId) {
-        var url = 'http://localhost:3100/api/page/' + pageId + '/widget';
+        var url = this.baseUrl + '/api/page/' + pageId + '/widget';
         return this.http.get(url).map(function (response) {
             return response.json();
         });
     };
     // retrieves the widget in local widgets array whose _id matches the widgetId parameter
     WidgetService.prototype.findWidgetById = function (widgetId) {
-        var url = 'http://localhost:3100/api/widget/' + widgetId;
+        var url = this.baseUrl + '/api/widget/' + widgetId;
         return this.http.get(url).map(function (response) {
             return response.json();
         });
     };
     // updates the widget in local widgets array whose _id matches the widgetId parameter
     WidgetService.prototype.updateWidget = function (widgetId, widget) {
-        var url = 'http://localhost:3100/api/widget/' + widgetId;
+        var url = this.baseUrl + '/api/widget/' + widgetId;
         return this.http.put(url, widget).map(function (response) {
             return response.json();
         });
     };
     // removes the widget from local widgets array whose _id matches the widgetId parameter
     WidgetService.prototype.deleteWidget = function (widgetId) {
-        var url = 'http://localhost:3100/api/widget/' + widgetId;
+        var url = this.baseUrl + '/api/widget/' + widgetId;
         return this.http.delete(url).map(function (response) {
             return response.json();
         });
