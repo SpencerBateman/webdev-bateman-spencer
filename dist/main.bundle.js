@@ -2243,8 +2243,9 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__ = __webpack_require__("../../../../rxjs/_esm5/Rx.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_service_client__ = __webpack_require__("../../../../../src/app/services/shared.service.client.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_service_client__ = __webpack_require__("../../../../../src/app/services/shared.service.client.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2259,6 +2260,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 // injecting the service into module
 var UserService = (function () {
     function UserService(http, router, sharedService) {
@@ -2266,6 +2268,7 @@ var UserService = (function () {
         this.router = router;
         this.sharedService = sharedService;
         this.options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* RequestOptions */]();
+        this.baseUrl = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].baseUrl;
         this.api = {
             'createUser': this.createUser,
             'findUserById': this.findUserById,
@@ -2274,7 +2277,7 @@ var UserService = (function () {
         };
     }
     UserService.prototype.register = function (username, password, firstName, lastName) {
-        var url = 'http://localhost:3100/api/register';
+        var url = this.baseUrl + '/api/register';
         var credentials = {
             username: username,
             password: password,
@@ -2288,7 +2291,7 @@ var UserService = (function () {
         });
     };
     UserService.prototype.logout = function () {
-        var url = 'http://localhost:3100/api/logout';
+        var url = this.baseUrl + '/api/logout';
         this.options.withCredentials = true;
         return this.http.post(url, '', this.options)
             .map(function (status) {
@@ -2298,7 +2301,7 @@ var UserService = (function () {
     UserService.prototype.loggedIn = function () {
         var _this = this;
         this.options.withCredentials = true;
-        var url = 'http://localhost:3100/api/loggedIn';
+        var url = this.baseUrl + '/api/loggedIn';
         return this.http.post(url, '', this.options)
             .map(function (res) {
             var user = res.json();
@@ -2315,7 +2318,7 @@ var UserService = (function () {
         });
     };
     UserService.prototype.login = function (username, password) {
-        var url = 'http://localhost:3100/api/login';
+        var url = this.baseUrl + '/api/login';
         var credentials = {
             username: username,
             password: password
@@ -2328,42 +2331,42 @@ var UserService = (function () {
     };
     // adds the user parameter instance to the local users array
     UserService.prototype.createUser = function (user) {
-        var url = 'http://localhost:3100/api/user';
+        var url = this.baseUrl + '/api/user';
         return this.http.post(url, user).map(function (response) {
             return response.json();
         });
     };
     // returns the user in local users array whose _id matches the userId parameter
     UserService.prototype.findUserById = function (userId) {
-        var url = 'http://localhost:3100/api/user/' + userId;
+        var url = this.baseUrl + '/api/user/' + userId;
         return this.http.get(url).map(function (response) {
             return response.json();
         });
     };
     // returns the user in local users array whose username matches the parameter username
     UserService.prototype.findUserByUsername = function (username) {
-        var url = 'http://localhost:3100/api/user?username=' + username;
+        var url = this.baseUrl + '/api/user?username=' + username;
         return this.http.get(url).map(function (response) {
             return response.json();
         });
     };
     //returns the user whose username and password match the username and password parameters
     UserService.prototype.findUserByCredentials = function (username, password) {
-        var url = 'http://localhost:3100/api/user?username=' + username + '&password=' + password;
+        var url = this.baseUrl + '/api/user?username=' + username + '&password=' + password;
         return this.http.get(url).map(function (response) {
             return response.json();
         });
     };
     // updates the user in local users array whose _id matches the userId parameter
     UserService.prototype.updateUser = function (userId, user) {
-        var url = 'http://localhost:3100/api/user/' + userId;
+        var url = this.baseUrl + '/api/user/' + userId;
         return this.http.put(url, user).map(function (response) {
             return response.json();
         });
     };
     // removes the user whose _id matches the userId parameter
     UserService.prototype.deleteUser = function (userId) {
-        var url = 'http://localhost:3100/api/user/' + userId;
+        var url = this.baseUrl + '/api/user/' + userId;
         return this.http.delete(url).map(function (response) {
             return response.json();
         });
@@ -2372,7 +2375,7 @@ var UserService = (function () {
 }());
 UserService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__shared_service_client__["a" /* SharedService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__shared_service_client__["a" /* SharedService */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__shared_service_client__["a" /* SharedService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__shared_service_client__["a" /* SharedService */]) === "function" && _c || Object])
 ], UserService);
 
 var _a, _b, _c;
