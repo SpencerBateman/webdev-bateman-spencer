@@ -6,6 +6,10 @@ module.exports = function(app) {
   passport.serializeUser(serializeUser);
   passport.deserializeUser(deserializeUser);
 
+  app.get('/api/hello', function(req, res) {
+    res.send('api hello world');
+  });
+  
   app.post('/api/login', passport.authenticate('local'), login);
   app.post('/api/loggedIn', loggedIn);
   app.post('/api/register', register);
