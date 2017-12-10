@@ -176,8 +176,10 @@ module.exports = function(app) {
 //         });
       return;
     } else {
-      console.log(userModel);
-      console.log(userModel.findAllUsers);
+      // console.log(userModel);
+      // console.log(userModel.findAllUsers);
+      var promise = userModel.findAllUsers();
+      console.log(promise.then);
       res.send('[2] return all users');
 
       // userModel
