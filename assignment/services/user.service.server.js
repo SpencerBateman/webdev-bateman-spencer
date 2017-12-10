@@ -179,8 +179,10 @@ module.exports = function(app) {
       // console.log(userModel);
       // console.log(userModel.findAllUsers);
       var promise = userModel.findAllUsers();
+      res.send('[2] return all users - 123');
+      console.log('[2] return all users - before');
       console.log(promise.then);
-      res.send('[2] return all users');
+      console.log('[2] return all users - after');
 
       // userModel
       //   .findAllUsers()
