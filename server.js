@@ -40,6 +40,10 @@ const server = http.createServer(app);
 
 require("./assignment/app.js")(app);
 
+app.get('/hello', function(req, res) {
+  res.send('hello world');
+});
+
 // For Build: Catch all other routes and return the index file -- BUILDING
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
