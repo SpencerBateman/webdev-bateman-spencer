@@ -176,12 +176,14 @@ module.exports = function(app) {
 //         });
       return;
     } else {
-      res.send('[2] return all users');
-//       userModel
-//         .findAllUsers()
-//         .then(function(users) {
-//           res.json(users);
-//       });
+//       res.send('[2] return all users');
+      userModel
+        .findAllUsers()
+        .then(function(users) {
+          res.json(users);
+        }, function(err){
+          res.send(err);
+        });
       return;
     }
    // */
