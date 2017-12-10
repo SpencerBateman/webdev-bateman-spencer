@@ -179,18 +179,19 @@ module.exports = function(app) {
       // console.log(userModel);
       // console.log(userModel.findAllUsers);
       var promise = userModel.findAllUsers();
-      res.send('[2] return all users - 123');
       console.log('[2] return all users - before');
       console.log(promise.then);
       console.log('[2] return all users - after');
 
-      // userModel
-      //   .findAllUsers()
-      //   .then(function(users) {
-      //     res.json(users);
+      promise
+        .then(function(users) {
+          console.log("users");
+          console.log(users);
+          // res.send('[2] return all users - 123');
+          res.json(users);
       //   }, function(err){
       //     res.send(err);
-      //   });
+        });
       return;
     }
    // */
