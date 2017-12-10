@@ -172,11 +172,14 @@ module.exports = function(app) {
         });
       return;
     } else {
+      res.send('return all users');
+      /*
       userModel
         .findAllUsers()
         .then(function(users) {
           res.json(users);
       });
+      */
     }
   }
 }
