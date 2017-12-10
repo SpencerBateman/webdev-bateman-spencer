@@ -6,7 +6,7 @@ module.exports = function(app) {
   app.put('/api/widget/:widgetId', updateWidget);
   app.delete('/api/widget/:widgetId', deleteWidget);
 
-  let widgetModel = require('../model/widget/widget.model.server');
+  var widgetModel = require('../model/widget/widget.model.server');
 
   function createWidget(req, res) {
     var pageId = req.params['pageId'];

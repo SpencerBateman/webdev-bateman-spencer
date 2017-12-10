@@ -1,7 +1,7 @@
 module.exports = function(app) {
-  let userModel = require('../model/user/user.model.server');
-  let passport = require('passport');
-  let bcrypt = require("bcrypt-nodejs");
+  var userModel = require('../model/user/user.model.server');
+  var passport = require('passport');
+  var bcrypt = require("bcrypt-nodejs");
 
   passport.serializeUser(serializeUser);
   passport.deserializeUser(deserializeUser);
@@ -9,7 +9,7 @@ module.exports = function(app) {
   app.get('/api/hello', function(req, res) {
     res.send('api hello world');
   });
-  
+
   app.post('/api/login', passport.authenticate('local'), login);
   app.post('/api/loggedIn', loggedIn);
   app.post('/api/register', register);
@@ -26,8 +26,8 @@ module.exports = function(app) {
     failureRedirect: 'http://localhost:4200/login'
   }));
 
-  let LocalStrategy = require('passport-local').Strategy;
-  let FacebookStrategy = require('passport-facebook').Strategy;
+  var LocalStrategy = require('passport-local').Strategy;
+  var FacebookStrategy = require('passport-facebook').Strategy;
 
   passport.use(new LocalStrategy(localStrategy));
 
@@ -51,8 +51,8 @@ module.exports = function(app) {
         if (user) {
           return done(null, user);
         } else {
-          let names = profile.displayName.split(" ");
-          let newFacebookUser = {
+          var names = profile.displayName.split(" ");
+          var newFacebookUser = {
             lastName:  names[1],
             firstName: names[0],
             email:     profile.emails ? profile.emails[0].value:"",
@@ -79,7 +79,7 @@ module.exports = function(app) {
   }
 
   function localStrategy(usrn, pass, done) {
-    userModel.findUserByUsername(usrn).then((user) => {
+    userModel.findUserByUsername(usrn).then(function(user) {
       if (user.username === usrn && bcrypt.compareSync(pass, user.password)) {
         console.log('sucessfully done');
         return done(null, user);
@@ -96,7 +96,7 @@ module.exports = function(app) {
   function register(req, res) {
     var user = req.body;
     user.password = bcrypt.hashSync(user.password);
-    userModel.createUser(user).then((user) => {
+    userModel.createUser(user).then(function(user) {
       req.login(user, function(err) {
         res.json(user);
       });

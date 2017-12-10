@@ -6,7 +6,7 @@ module.exports = function(app) {
   app.put('/api/website/:websiteId', updateWebsite);
   app.delete('/api/website/:websiteId', deleteWebsite);
 
-  let websiteModel = require('../model/website/website.model.server');
+  var websiteModel = require('../model/website/website.model.server');
 
   function createWebsite(req, res) {
     var website = req.body;

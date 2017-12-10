@@ -1,7 +1,7 @@
 module.exports = function(app)
 {
 
-    app.get('/api', (req, res) => {
+    app.get('/api', function(req, res) {
       res.send('App works');
     });
     app.get("/api/test", findAllMessages);
