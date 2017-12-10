@@ -37,9 +37,9 @@ module.exports = function(app) {
   }
 
   var facebookConfig = {
-    clientID     : process.env.FACEBOOK_CLIENT_ID,
-    clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-    callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+    clientID     : 'process.env.FACEBOOK_CLIENT_ID',
+    clientSecret : 'process.env.FACEBOOK_CLIENT_SECRET',
+    callbackURL  : 'process.env.FACEBOOK_CALLBACK_URL'
   };
 
   passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
@@ -176,14 +176,17 @@ module.exports = function(app) {
 //         });
       return;
     } else {
-//       res.send('[2] return all users');
-      userModel
-        .findAllUsers()
-        .then(function(users) {
-          res.json(users);
-        }, function(err){
-          res.send(err);
-        });
+      console.log(userModel);
+      console.log(userModel.findAllUsers);
+      res.send('[2] return all users');
+
+      // userModel
+      //   .findAllUsers()
+      //   .then(function(users) {
+      //     res.json(users);
+      //   }, function(err){
+      //     res.send(err);
+      //   });
       return;
     }
    // */
