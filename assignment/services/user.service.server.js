@@ -157,8 +157,7 @@ module.exports = function(app) {
   function findAllUser(req, res) {
     var username = req.query['username'];
     var password = req.query['password'];
-    res.send(req.query);
-/*
+
     if (username && password) {
       userModel
         .findUserByCredentials(username, password)
@@ -172,7 +171,12 @@ module.exports = function(app) {
           res.json(user);
         });
       return;
+    } else {
+      userModel
+        .findAllUsers()
+        .then(function(users) {
+          res.json(users);
+      });
     }
-    */
   }
 }
