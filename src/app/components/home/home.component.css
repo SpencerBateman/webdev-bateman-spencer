@@ -1,0 +1,45 @@
+body {
+  background: blue;
+}
+
+.homepage__background {
+  background: url('/assets/giphy.gif');
+  height: 100vh;
+}
+.homepage__background--blue {
+  position: fixed;
+  z-index: -1;
+  background: #6b91ce;
+  height: 100vh;
+  width: 100%;
+}
+
+img {
+  display: block;
+  max-width: 50%;
+  border-radius: 10px;
+  margin: 50px 0 0 0;
+}
+
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  color: white;
+}
+
+h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  color: white;
+}
+
+button {
+  font-family: 'montserrat', sans-serif;
+}
+
+p {
+  width: 50%;
+  font-size: 24px;
+  display: block;
+  color: white;
+}

@@ -257,7 +257,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "body {\n  background: blue;\n}\n\n.homepage__background {\n  background: url('/assets/giphy.gif');\n  height: 100vh;\n}\n.homepage__background--blue {\n  position: fixed;\n  z-index: -1;\n  background: #6b91ce;\n  height: 100vh;\n  width: 100%;\n}\n\nimg {\n  display: block;\n  max-width: 50%;\n  border-radius: 10px;\n  margin: 50px 0 0 0;\n}\n\nh1 {\n  font-family: 'Montserrat', sans-serif;\n  font-weight: 900;\n  color: white;\n}\n\nh2 {\n  font-family: 'Montserrat', sans-serif;\n  font-weight: 900;\n  color: white;\n}\n\nbutton {\n  font-family: 'montserrat', sans-serif;\n}\n\np {\n  width: 50%;\n  font-size: 24px;\n  display: block;\n  color: white;\n}\n", ""]);
 
 // exports
 
@@ -270,7 +270,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"container\">\n  <h1>Spencer Bateman | Webdev Fall 2017</h1>\n  <h4>\n    <!--<a [routerLink]=\"['/test']\">Test MongoDB</a>-->\n  </h4>\n  <a [routerLink]=\"['/login']\"><h3>Webdev Homework Assignment</h3></a>\n  <div>\n    <a href=\"https://docs.google.com/document/d/16MeghDGcKFpVvpTa3VdbIOvTmNSwLYoGWCZQCg3koFU/edit?usp=sharing\"><h3>Project Description</h3></a>\n  </div>\n\n</div>\n\n"
+module.exports = "<div class='homepage__background'>\n<div class='homepage__background--blue'>\n</div>\n  <div class=\"container\">\n    <img src='assets/profile.png'>\n    <h1>Spencer Bateman</h1>\n    <h2>Webdev Fall 2017</h2>\n    <p>I am an undergraduate student at Northeastern University. This is the hompage for my Web Development Class</p>\n    <button class='btn btn-primary' [routerLink]=\"['/login']\">Webdev Homework Assignment</button>\n    <a href=\"https://docs.google.com/document/d/16MeghDGcKFpVvpTa3VdbIOvTmNSwLYoGWCZQCg3koFU/edit?usp=sharing\"><button class='btn btn-primary'>Project Description</button></a>\n    <a href='https://github.com/SpencerBateman'><button class='btn btn-primary'>My Github</button></a>\n    <a href=\"https://mooodio.herokuapp.com\"><button class='btn btn-primary'>Final Project</button></a>\n    <a href=\"http://spencer.pizza\"><button class='btn btn-primary'>Personal Site</button></a>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -2545,8 +2545,8 @@ var _a;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
 var environment = {
-    production: true,
-    baseUrl: 'http://webdev-bateman-spencer.herokuapp.com'
+    production: false,
+    baseUrl: 'http://localhost:3100'
 };
 //# sourceMappingURL=environment.js.map
 
