@@ -157,44 +157,28 @@ module.exports = function(app) {
   function findAllUser(req, res) {
     var username = req.query['username'];
     var password = req.query['password'];
-//    res.send('return all users');
-//*
     if (username && password) {
-      res.send('[0] username && password');
-//       userModel
-//         .findUserByCredentials(username, password)
-//         .then(function(user) {
-//           res.json(user);
-//         });
+      userModel
+        .findUserByCredentials(username, password)
+        .then(function(user) {
+          res.json(user);
+        });
       return;
     } else if (username) {
-      res.send('[1] username');
-//       userModel
-//         .findUserByUsername(username)
-//         .then(function(user) {
-//           res.json(user);
-//         });
+      userModel
+        .findUserByUsername(username)
+        .then(function(user) {
+          res.json(user);
+        });
       return;
     } else {
-      // console.log(userModel);
-      // console.log(userModel.findAllUsers);
       var promise = userModel.findAllUsers();
-      console.log('[2] return all users - before');
-      console.log(promise.then);
-      console.log('[2] return all users - after');
-
       promise
         .then(function(users) {
-          console.log("users");
-          console.log(users);
-          // res.send('[2] return all users - 123');
           res.json(users);
-      //   }, function(err){
-      //     res.send(err);
         });
       return;
     }
-   // */
       return;
   }
-}
+};
